@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu VR — Nova Senha</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="burger.css">
+    <style>
+        /* ── 2 campos: nova-senha + confirmar-senha ── */
+        .overlay-nova {
+            top: 39%;
+        }
+
+        .overlay-confirmar {
+            top: 54%;
+        }
+
+        .overlay-btn {
+            top: 72%;
+        }
+
+        .hints-wrap {
+            top: calc(39% + 52px);
+        }
+
+        @media (max-width:480px) {
+            .overlay-nova {
+                top: 38%;
+            }
+
+            .overlay-confirmar {
+                top: 53%;
+            }
+
+            .overlay-btn {
+                top: 71%;
+            }
+
+            .hints-wrap {
+                top: calc(38% + 52px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <svg class="light-rays" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.5" fill="none">
+            <line x1="450" y1="450" x2="0" y2="0" />
+            <line x1="450" y1="450" x2="150" y2="0" />
+            <line x1="450" y1="450" x2="300" y2="0" />
+            <line x1="450" y1="450" x2="450" y2="0" />
+            <line x1="450" y1="450" x2="600" y2="0" />
+            <line x1="450" y1="450" x2="750" y2="0" />
+            <line x1="450" y1="450" x2="900" y2="0" />
+            <line x1="450" y1="450" x2="900" y2="150" />
+            <line x1="450" y1="450" x2="900" y2="300" />
+            <line x1="450" y1="450" x2="900" y2="450" />
+            <line x1="450" y1="450" x2="900" y2="600" />
+            <line x1="450" y1="450" x2="900" y2="750" />
+            <line x1="450" y1="450" x2="900" y2="900" />
+            <line x1="450" y1="450" x2="750" y2="900" />
+            <line x1="450" y1="450" x2="600" y2="900" />
+            <line x1="450" y1="450" x2="450" y2="900" />
+            <line x1="450" y1="450" x2="300" y2="900" />
+            <line x1="450" y1="450" x2="150" y2="900" />
+            <line x1="450" y1="450" x2="0" y2="900" />
+            <line x1="450" y1="450" x2="0" y2="750" />
+            <line x1="450" y1="450" x2="0" y2="600" />
+            <line x1="450" y1="450" x2="0" y2="450" />
+            <line x1="450" y1="450" x2="0" y2="300" />
+            <line x1="450" y1="450" x2="0" y2="150" />
+        </g>
+    </svg>
+
+    <div class="logo-wrap"><img src="assets/Logo.svg" alt="Logo Menu VR"></div>
+
+    <div class="burger-stack">
+        <div class="burger-layer layer-pao-topo"><img src="assets/pao_de_cima 1 (1).svg" alt="Pão do topo"></div>
+        <div class="burger-layer layer-carne1"><img src="assets/Carne-queijo.svg" alt=""></div>
+        <div class="burger-layer layer-tomate"><img src="assets/Tomate.svg" alt=""></div>
+        <div class="burger-layer layer-carne2"><img src="assets/Carne-queijo.svg" alt=""></div>
+        <div class="burger-layer layer-alface"><img src="assets/Alface.svg" alt=""></div>
+        <div class="burger-layer layer-pao-baixo"><img src="assets/Pao_baixo.svg" alt="Pão de baixo"></div>
+
+        <!-- Nova Senha -->
+        <div class="form-overlay overlay-nova">
+            <div class="input-wrap" id="wrap-nova">
+                <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg></span>
+                <input type="password" id="nova-senha" class="glass-field" placeholder="Nova senha"
+                    autocomplete="new-password">
+                <button type="button" class="eye-btn" id="toggleNova" aria-label="Mostrar/ocultar nova senha">
+                    <svg id="eyeNova" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </button>
+            </div>
+            <span class="field-msg" id="msg-nova"></span>
+        </div>
+
+        <!-- Hints nova senha -->
+        <div class="password-hints-wrap hints-wrap">
+            <div class="password-hints" id="senha-hints">
+                <div class="hint" id="hint-len"> <span class="hint-dot"></span> Mínimo 8 caracteres</div>
+                <div class="hint" id="hint-upper"><span class="hint-dot"></span> 1 letra maiúscula</div>
+                <div class="hint" id="hint-lower"><span class="hint-dot"></span> 1 letra minúscula</div>
+                <div class="hint" id="hint-num"> <span class="hint-dot"></span> 1 número</div>
+                <div class="hint" id="hint-spec"> <span class="hint-dot"></span> 1 caractere especial</div>
+            </div>
+        </div>
+
+        <!-- Confirmar Senha -->
+        <div class="form-overlay overlay-confirmar">
+            <div class="input-wrap" id="wrap-confirmar">
+                <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 11l3 3L22 4" />
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                    </svg></span>
+                <input type="password" id="confirmar-senha" class="glass-field" placeholder="Repetir senha"
+                    autocomplete="new-password">
+                <button type="button" class="eye-btn" id="toggleConfirmar" aria-label="Mostrar/ocultar confirmação">
+                    <svg id="eyeConfirmar" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </button>
+            </div>
+            <span class="field-msg" id="msg-confirmar"></span>
+        </div>
+
+        <!-- Botão -->
+        <div class="form-overlay overlay-btn">
+            <button type="button" class="btn-entrar" id="btnSubmit" disabled>Confirmar</button>
+        </div>
+    </div>
+
+    <footer class="burger-footer">
+        <a href="codigo-confirmacao.html" class="footer-link back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+            </svg>
+            Voltar
+        </a>
+        <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
+    </footer>
+
+    <!-- Modal sucesso -->
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal-box">
+            <div class="modal-icon success"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg></div>
+            <h2 class="modal-title">Senha redefinida<br>com sucesso!</h2>
+            <p class="modal-sub">Sua nova senha foi salva.<br>Faça login para continuar.</p>
+            <button type="button" class="modal-btn" id="modalOk">Ir para Login</button>
+        </div>
+    </div>
+
+    <script src="burger-validate.js"></script>
+    <script>
+        (() => {
+            const states = { nova: false, confirmar: false };
+            const btn = document.getElementById('btnSubmit');
+            const novaSenhaInput = document.getElementById('nova-senha');
+            const update = BurgerValidate.bindBtn(btn, states);
+
+            BurgerValidate.bindSenha(
+                novaSenhaInput,
+                document.getElementById('wrap-nova'),
+                document.getElementById('msg-nova'),
+                document.getElementById('senha-hints'),
+                null,
+                v => {
+                    states.nova = v;
+                    // Revalida o confirmar ao mudar a senha principal
+                    const confInput = document.getElementById('confirmar-senha');
+                    if (confInput.value) {
+                        const match = confInput.value === novaSenhaInput.value;
+                        BurgerValidate.setWrap(document.getElementById('wrap-confirmar'), match ? 'is-valid' : 'is-invalid');
+                        BurgerValidate.showMsg(document.getElementById('msg-confirmar'), match ? '✓ Senhas conferem' : '✗ Senhas não conferem', match);
+                        states.confirmar = match;
+                    }
+                    update();
+                }
+            );
+            BurgerValidate.bindConfirmarSenha(
+                document.getElementById('confirmar-senha'),
+                document.getElementById('wrap-confirmar'),
+                document.getElementById('msg-confirmar'),
+                () => novaSenhaInput.value,
+                v => { states.confirmar = v; update(); }
+            );
+
+            BurgerValidate.bindEye(document.getElementById('toggleNova'), novaSenhaInput, document.getElementById('eyeNova'));
+            BurgerValidate.bindEye(document.getElementById('toggleConfirmar'), document.getElementById('confirmar-senha'), document.getElementById('eyeConfirmar'));
+
+            btn.addEventListener('click', () => {
+                if (!states.nova || !states.confirmar) return;
+                BurgerValidate.openModal(document.getElementById('modalBackdrop'));
+            });
+            BurgerValidate.bindModal(document.getElementById('modalBackdrop'), document.getElementById('modalOk'), 'index.html');
+        })();
+    </script>
+</body>
+
+</html>

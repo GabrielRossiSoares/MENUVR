@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu VR — Código de Confirmação</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="burger.css">
+    <style>
+        /* ── 1 campo: código ── */
+        .overlay-codigo {
+            top: 44%;
+        }
+
+        .overlay-btn {
+            top: 63%;
+        }
+
+        /* Campo de código com letra maior e centrado */
+        #codigo {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            padding-left: 18px;
+            /* sem ícone, padding simétrico */
+        }
+
+        @media (max-width:480px) {
+            .overlay-codigo {
+                top: 43%;
+            }
+
+            .overlay-btn {
+                top: 62%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <svg class="light-rays" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.5" fill="none">
+            <line x1="450" y1="450" x2="0" y2="0" />
+            <line x1="450" y1="450" x2="150" y2="0" />
+            <line x1="450" y1="450" x2="300" y2="0" />
+            <line x1="450" y1="450" x2="450" y2="0" />
+            <line x1="450" y1="450" x2="600" y2="0" />
+            <line x1="450" y1="450" x2="750" y2="0" />
+            <line x1="450" y1="450" x2="900" y2="0" />
+            <line x1="450" y1="450" x2="900" y2="150" />
+            <line x1="450" y1="450" x2="900" y2="300" />
+            <line x1="450" y1="450" x2="900" y2="450" />
+            <line x1="450" y1="450" x2="900" y2="600" />
+            <line x1="450" y1="450" x2="900" y2="750" />
+            <line x1="450" y1="450" x2="900" y2="900" />
+            <line x1="450" y1="450" x2="750" y2="900" />
+            <line x1="450" y1="450" x2="600" y2="900" />
+            <line x1="450" y1="450" x2="450" y2="900" />
+            <line x1="450" y1="450" x2="300" y2="900" />
+            <line x1="450" y1="450" x2="150" y2="900" />
+            <line x1="450" y1="450" x2="0" y2="900" />
+            <line x1="450" y1="450" x2="0" y2="750" />
+            <line x1="450" y1="450" x2="0" y2="600" />
+            <line x1="450" y1="450" x2="0" y2="450" />
+            <line x1="450" y1="450" x2="0" y2="300" />
+            <line x1="450" y1="450" x2="0" y2="150" />
+        </g>
+    </svg>
+
+    <div class="logo-wrap"><img src="assets/Logo.svg" alt="Logo Menu VR"></div>
+
+    <div class="burger-stack">
+        <div class="burger-layer layer-pao-topo"><img src="assets/pao_de_cima 1 (1).svg" alt="Pão do topo"></div>
+        <div class="burger-layer layer-carne1"><img src="assets/Carne-queijo.svg" alt=""></div>
+        <div class="burger-layer layer-tomate"><img src="assets/Tomate.svg" alt=""></div>
+        <div class="burger-layer layer-carne2"><img src="assets/Carne-queijo.svg" alt=""></div>
+        <div class="burger-layer layer-alface"><img src="assets/Alface.svg" alt=""></div>
+        <div class="burger-layer layer-pao-baixo"><img src="assets/Pao_baixo.svg" alt="Pão de baixo"></div>
+
+        <!-- Código -->
+        <div class="form-overlay overlay-codigo">
+            <div class="input-wrap" id="wrap-codigo">
+                <input type="text" id="codigo" class="glass-field" placeholder="000000" inputmode="numeric"
+                    autocomplete="one-time-code">
+            </div>
+            <span class="field-msg" id="msg-codigo"></span>
+        </div>
+
+        <!-- Botão -->
+        <div class="form-overlay overlay-btn">
+            <button type="button" class="btn-entrar" id="btnSubmit" disabled>Confirmar</button>
+        </div>
+    </div>
+
+    <footer class="burger-footer">
+        <a href="esqueci-senha.html" class="footer-link back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+            </svg>
+            Voltar
+        </a>
+        <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
+    </footer>
+
+    <!-- Modal sucesso -->
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal-box">
+            <div class="modal-icon success"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg></div>
+            <h2 class="modal-title">Código confirmado!</h2>
+            <p class="modal-sub">Identidade verificada com sucesso.<br>Agora crie sua nova senha.</p>
+            <button type="button" class="modal-btn" id="modalOk">Criar Nova Senha</button>
+        </div>
+    </div>
+
+    <script src="burger-validate.js"></script>
+    <script>
+        (() => {
+            const states = { codigo: false };
+            const btn = document.getElementById('btnSubmit');
+            const update = BurgerValidate.bindBtn(btn, states);
+
+            BurgerValidate.bindCodigo(document.getElementById('codigo'), document.getElementById('wrap-codigo'), document.getElementById('msg-codigo'), 6, v => { states.codigo = v; update(); });
+
+            btn.addEventListener('click', () => {
+                if (!states.codigo) return;
+                BurgerValidate.openModal(document.getElementById('modalBackdrop'));
+            });
+            BurgerValidate.bindModal(document.getElementById('modalBackdrop'), document.getElementById('modalOk'), 'nova-senha.html');
+        })();
+    </script>
+</body>
+
+</html>

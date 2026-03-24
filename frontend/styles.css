@@ -1,0 +1,513 @@
+/* CSS Reset and Variables */
+:root {
+    --bg-color: #4b4b4c;
+    --card-bg: transparent; /* Assuming from prototype it's floating or slightly isolated */
+    --primary-color: #e0413b;
+    --primary-hover: #c93530;
+    --secondary-bg: #d4d7d9;
+    --secondary-hover: #c4c7c9;
+    --text-color: #4b4b4c;
+    --text-dark: #4b4b4c;
+    --icon-color: #eeb958;
+    --error-color: #e54641;
+    --focus-color: #2a88ed;
+    --success-color: #1b7774;
+    --access-bg: #112d4d;
+    --access-icon: #f8fafc;
+    
+    --radius-md: 6px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+    
+    --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Accessibility Float Button */
+.accessibility-float {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.btn-accessibility {
+    background-color: var(--access-bg);
+    color: var(--access-icon);
+    border: none;
+    width: 50px;
+    height: 60px;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, width 0.2s ease;
+}
+
+.btn-accessibility:hover, .btn-accessibility:focus {
+    width: 60px;
+    outline: none;
+}
+.btn-accessibility:focus-visible {
+    box-shadow: 0 0 0 3px var(--focus-color);
+}
+
+/* Container & Forms */
+.auth-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem 1rem;
+}
+
+.auth-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.logo-header {
+    width: 160px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5rem; /* Menos margem do que o h1 tinha para não empurrar muito */
+}
+
+.auth-header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #e5e7eb;
+}
+
+/* Form Styles */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Modern Wave Input Forms inside White Box */
+.form-control {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    background-color: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: box-shadow 0.2s ease;
+}
+
+.form-control:focus-within {
+    box-shadow: 0 0 0 2px var(--focus-color);
+}
+
+.form-control.valid {
+    box-shadow: 0 0 0 2px var(--success-color);
+}
+
+.form-control.error {
+    box-shadow: 0 0 0 2px var(--error-color);
+}
+
+.form-control input {
+    flex: 1;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 1rem 0;
+    font-size: 1rem;
+    color: var(--text-dark);
+    font-family: inherit;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+    outline: none;
+}
+
+.form-control .wave-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    display: flex;
+}
+
+.form-control .wave-label span {
+    display: inline-block;
+    font-size: 1rem;
+    color: var(--text-color);
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Wavy active state trigger - disappears when typing or focused */
+.form-control input:focus + .wave-label span,
+.form-control input.has-val + .wave-label span {
+    opacity: 0;
+    transform: translateY(-15px);
+}
+
+.form-control.error .wave-label span {
+    color: var(--error-color) !important;
+}
+
+/* Toggle Password Button in Wave Format */
+.form-control .btn-toggle-password {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    margin-left: 0.5rem;
+    align-self: center;
+    transition: opacity 0.2s ease;
+}
+
+.form-control .btn-toggle-password:hover, 
+.form-control .btn-toggle-password:focus {
+    opacity: 1;
+    outline: none;
+}
+.form-control .btn-toggle-password:focus-visible {
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 0 2px var(--focus-color);
+}
+
+
+
+
+/* Error messages */
+.error-message {
+    position: absolute;
+    bottom: -1.35rem;
+    left: 0.25rem;
+    color: var(--error-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--focus-color);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-bg);
+    color: var(--text-dark);
+    border: 1px solid #c8cbcf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
+/* Footer links */
+.auth-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    color: #e5e7eb;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.link {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link:hover, .link:focus {
+    color: #ffffff;
+    text-decoration: underline;
+    outline: none;
+}
+
+.auth-link {
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: underline;
+    transition: opacity 0.2s ease;
+}
+
+.auth-link:hover {
+    opacity: 0.8;
+}
+/* Notification Toast */
+.toast-container {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    pointer-events: none;
+}
+
+.toast {
+    background-color: #ffffff;
+    color: var(--text-dark);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--success-color);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transform: translateX(120%);
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    pointer-events: auto;
+    max-width: 320px;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast-icon {
+    color: var(--success-color);
+    flex-shrink: 0;
+}
+
+.toast-message {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.link:focus-visible {
+    box-shadow: 0 0 0 2px var(--focus-color);
+    border-radius: 2px;
+}
+/* ============================================================
+   RESPONSIVENESS - Mobile First
+   ============================================================ */
+
+/* Extra-small phones (< 360px) */
+@media (max-width: 360px) {
+    body {
+        padding: 0.5rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
+    .auth-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .logo-header {
+        width: 130px; /* Slightly smaller logo for tiny screens */
+    }
+
+    .logo-header {
+        width: 130px; /* Slightly smaller logo for tiny screens */
+    }
+
+    .auth-header h2 {
+        font-size: 0.9rem;
+        padding: 0.875rem;
+    }
+
+    /* Hide accessibility float button on very small screens */
+    .accessibility-float {
+        display: none;
+    }
+
+    /* Toast fullwidth on tiny screens */
+    .toast-container {
+        top: 0.75rem;
+        right: 0.75rem;
+        left: 0.75rem;
+    }
+
+    .toast {
+        max-width: 100%;
+    }
+}
+
+/* Small mobile (360px - 480px) */
+@media (min-width: 360px) and (max-width: 480px) {
+    body {
+        padding: 0.75rem;
+        align-items: flex-start;
+        padding-top: 2.5rem;
+    }
+
+    .auth-container {
+        max-width: 100%;
+        padding: 1.5rem 0.75rem;
+    }
+
+    .logo-header {
+        width: 150px;
+    }
+
+    .logo-header {
+        width: 150px;
+    }
+
+    .auth-header h2 {
+        top: auto;
+        bottom: 1.5rem;
+        transform: none;
+    }
+
+    .toast-container {
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+    }
+
+    .toast {
+        max-width: 100%;
+    }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    body {
+        padding: 1.5rem;
+        align-items: center;
+    }
+
+    .auth-container {
+        max-width: 440px;
+        padding: 2rem 1rem;
+    }
+
+    .logo-header {
+        width: 170px;
+    }
+
+    .logo-header {
+        width: 170px;
+    }
+
+    .auth-header h2 {
+        top: 50%;
+        bottom: auto;
+        transform: translateY(-50%);
+    }
+}
+
+/* Desktop (> 768px) - default rules already handle this */
+@media (min-width: 769px) {
+    body {
+        padding: 1rem;
+        align-items: center;
+    }
+
+    .auth-container {
+        max-width: 400px;
+    }
+
+    .accessibility-float {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+/* Touch-friendly: slightly larger form-controls on mobile */
+@media (max-width: 480px) {
+    .form-control {
+        min-height: 52px;
+    }
+
+    .form-control input {
+        font-size: 1rem; /* Prevent iOS zoom on focus */
+    }
+
+    .btn {
+        padding: 1rem;
+    }
+
+    .auth-footer {
+        font-size: 0.95rem;
+    }
+
+    .error-message {
+        font-size: 0.8rem;
+        white-space: normal; /* Allow wrapping on small screens */
+    }
+}
