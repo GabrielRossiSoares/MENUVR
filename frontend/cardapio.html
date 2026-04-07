@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Menu VR — Immersive Scrollytelling</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="cardapio.css">
+</head>
+<body>
+    
+    <!-- Canvas 3D de Fundo Absoluto -->
+    <div id="canvas-container"></div>
+    
+    <!-- Fundo Granulado Estético (Light mode) -->
+    <div class="noise-overlay"></div>
+
+    <!-- Navegação (Mantida conforme solicitação do usuário) -->
+    <header class="top-nav">
+        <div class="categories-bar">
+            <button class="cat-btn active" data-target="#section-mais-pedidos">Mais Pedidos</button>
+            <button class="cat-btn" data-target="#section-hamburguers">Hamburguers</button>
+            <button class="cat-btn" data-target="#section-combos">Combos</button>
+            <button class="cat-btn" data-target="#section-sobremesas">Sobremesas</button>
+            <button class="cat-btn" data-target="#section-drinks">Drinks</button>
+            <button class="cat-btn" data-target="#section-bebidas">Bebidas</button>
+        </div>
+        <div class="cart-icon" id="cart-trigger">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-badge">0</span>
+        </div>
+    </header>
+
+    <!-- Botão de Acessibilidade Flutuante (Injetado pelo JS, mas deixamos o estilo carregar) -->
+    
+    <!-- Dica de Interação Inicial -->
+    <div class="scroll-hint">
+        <span>Arraste para explorar o cardápio</span>
+        <div class="mouse-icon"></div>
+    </div>
+
+    <!-- Conteúdo HTML sobreposto (Vitrine) -->
+    <main id="scroll-container">
+        <!-- Renderizado dinamicamente pelo JS -->
+    </main>
+
+    <!-- Modal do Carrinho (Drawer Lateral) -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>Seu Carrinho</h3>
+            <button id="close-cart" class="close-btn">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items-list">
+            <!-- Itens rendrizados via JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span>Total:</span>
+                <span id="cart-total-value">R$ 0,00</span>
+            </div>
+            <button class="checkout-btn">Finalizar Pedido</button>
+        </div>
+    </div>
+    <div id="modal-overlay" class="modal-overlay"></div>
+
+    <!-- Bibliotecas Externas para Scrollytelling e 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Acessibilidade Global -->
+    <script src="accessibility.js"></script>
+    
+    <script src="cardapio.js"></script>
+</body>
+</html>

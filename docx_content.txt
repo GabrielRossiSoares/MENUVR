@@ -1,0 +1,596 @@
+Faculdade Insted
+Curso: Análise e Desenvolvimento de Sistemas
+Gabriel Rossi Soares (RA: 2025107620)
+Lucas Hideki Moroto Kajihara (RA: 2025107607)
+Matheus Marques Nesralla (RA: 2025107577)
+Matheus Henrique Valdez da Silva (RA: 2025107668)
+MENUVR
+Sistema de Cardápio Digital com Visualização 3D e Painel Administrador
+Campo Grande-MS
+2025
+Gabriel Rossi Soares (RA: 2025107620)
+Lucas Hideki Moroto Kajihara (RA: 2025107607)
+Matheus Marques Nesralla (RA: 2025107577)
+Matheus Henrique Valdez da Silva (RA: 2025107668)
+MENUVR
+Sistema de Cardápio Digital com Visualização 3D e Painel Administrador
+Trabalho apresentado ao curso de Análise e Desenvolvimento de Sistemas da Faculdade Insted, como requisito parcial para 
+aprovação
+ 
+na
+ 
+disciplina
+ PROJETO INTEGRADOR 2.
+Orientador
+(a): 
+ODIRLEY FRANCO DE OLIVEIRA
+Campo Grande-MS
+2025
+Sumário
+1 INTRODUÇÃO
+5
+1.1 JUSTIFICATIVA
+5
+1.2 OBJETIVOS
+5
+Objetivo geral:
+5
+Objetivos específicos:
+5
+1.3 ESCOPO E DELIMITAÇÕES
+6
+2 TECNOLOGIAS
+6
+2.1 FRONT-END
+6
+2.2 BACK-END
+6
+2.3 BANCO DE DADOS
+6
+3 VISÃO GERAL DO SISTEMA
+6
+3.1 MÓDULO CLIENTE
+6
+3.2 MÓDULO ADMINISTRADOR DO CARDÁPIO
+7
+4 REQUISITOS
+7
+4.1 REQUISITOS FUNCIONAIS
+7
+4.2 REQUISITOS NÃO FUNCIONAIS
+7
+5 PROTOTIPAÇÃO DE TELAS
+8
+5.1 TELAS DO MÓDULO CLIENTE
+8
+5.2 TELAS DO MÓDULO ADMINISTRADOR
+8
+6 VALIDAÇÕES E ACESSIBILIDADE
+8
+6.1 VALIDAÇÕES DE CAMPOS
+8
+6.2 ACESSIBILIDADE (MÍNIMO 2 IMPLEMENTAÇÕES)
+9
+7 Modelo Entidade-Relacionamento (MER)
+9
+7.1.1 Entidades
+9
+7.1.1.1 Administradores
+9
+Atributos:
+9
+7.1.1.2 Categorias
+10
+Atributos:
+10
+7.1.1.3 Produtos
+10
+Atributos:
+10
+7.1.2 Relacionamentos
+11
+a) Categorias e Produtos (1:N)
+11
+b) Administradores e Categorias (1:N)
+11
+c) Administradores e Produtos (1:N)
+11
+7.1.3 Regras de Negócio
+11
+7.2 DICIONÁRIO DE DADOS
+12
+7.3 CASOS DE USO (RESUMO)
+12
+7.4 DIAGRAMA DE SEQUÊNCIA (BÔNUS) - DESCRIÇÃO
+12
+8 PLANO DE ENTREGA - PARTICIPAÇÃO 1 (27/02)
+13
+9 CONCLUSÃO
+13
+REFERÊNCIAS
+13
+APÊNDICE A – DIAGRAMA ENTIDADE-RELACIONAMENTO
+14
+APÊNDICE B – DIAGRAMA DE CASO DE USO (UML)
+15
+1 INTRODUÇÃO
+O MenuVR é um sistema web cujo foco é a apresentação de um cardápio digital interativo, com suporte à visualização tridimensional (3D) de produtos, visando melhorar a compreensão do cliente sobre o prato e tornar a experiência de navegação mais imersiva. O projeto foi delimitado para concentrar esforços na entrega de um produto viável no contexto acadêmico, evitando a complexidade de módulos típicos de sistemas completos de gerenciamento de restaurantes.
+1.1 JUSTIFICATIVA
+A
+ 
+apresentação
+ visual do 
+produto
+ influencia diretamente a tomada de decisão do usuário. Nesse contexto, a visualização 3D aplicada ao cardápio pode reduzir dúvidas sobre tamanho, composição e aparência, além de representar um diferencial tecnológico em relação a cardápios convencionais. Do ponto de vista acadêmico, o MenuVR permite explorar conceitos de desenvolvimento web, integração front-end/back-end, persistência de dados e 
+renderização
+ 3D no 
+navegador
+.
+1.2 OBJETIVOS
+Objetivo
+ 
+geral
+:
+Desenvolver um sistema web responsivo de cardápio digital que permita visualizar produtos em 3D e administrar os itens do cardápio por meio de um painel administrativo.
+Objetivos específicos:
+Implementar as telas prototipadas do módulo cliente (cardápio, visualização 3D e fluxo básico de navegação).
+Implementar o módulo administrador para cadastro, edição, ativação/desativação e remoção de produtos do cardápio.
+Criar validações de campos de entrada nos formulários (cliente e administrador) com feedback ao usuário.
+Aplicar pelo menos duas melhorias de acessibilidade conforme diretrizes de boas práticas.
+Modelar e documentar o banco de dados e os principais fluxos do sistema (DER, MER, dicionário de dados, casos de uso e diagrama de sequência).
+1.3 ESCOPO E DELIMITAÇÕES
+O sistema será composto por dois módulos:
+Módulo Cliente: visualização do cardápio, detalhes do produto e visualização 3D.
+Módulo Administrador: autenticação e CRUD do cardápio (produtos e categorias).
+Não fazem parte do escopo desta versão:
+Gestão de pedidos, pagamentos, mesas, delivery, estoque e funcionários.
+Emissão de nota fiscal e integrações com gateways de pagamento.
+Relatórios gerenciais avançados.
+2 TECNOLOGIAS
+O MenuVR utiliza tecnologias de desenvolvimento web com ênfase em JavaScript para reduzir a curva de aprendizado e viabilizar um desenvolvimento full-stack consistente.
+2.1 FRONT-END
+HTML5: Estrutura semântica das páginas e formulários.
+CSS3: Estilização, layout responsivo e consistência visual.
+JavaScript: Interatividade, requisições assíncronas e validação de formulários.
+Three.js: Renderização 3D via WebGL para visualização dos modelos dos produtos.
+2.2 BACK-END
+Node.js: Ambiente de execução no servidor para APIs e lógica de negócios.
+Express.js: Framework para criação de rotas e APIs REST.
+2.3 BANCO DE DADOS
+PostgresSQL
+: 
+armazenamento
+ 
+estruturado
+ de produtos, categorias e usuários administradores.
+3 VISÃO GERAL DO SISTEMA
+3.1 MÓDULO CLIENTE
+Acesso ao cardápio por link e/ou QR Code.
+Listagem de categorias e produtos (nome, preço, descrição e imagem).
+Tela de detalhes com visualização 3D (rotacionar e zoom).
+3.2 MÓDULO ADMINISTRADOR DO CARDÁPIO
+Login do administrador.
+Cadastro e edição de categorias.
+Cadastro e edição de produtos (incluindo upload de imagem e arquivo 3D).
+Ativar/desativar produtos para controle de disponibilidade.
+4 REQUISITOS
+4.1 REQUISITOS FUNCIONAIS
+ID
+Nome
+Descrição resumida
+RF001
+Autenticar administrador
+Administrador realiza login com e-mail e senha válidos.
+RF002
+Cadastrar categoria
+Administrador cria categorias para organizar o cardápio.
+RF003
+Cadastrar produto
+Administrador cadastra produto com nome, descrição, preço, categoria, imagem e modelo 3D.
+RF004
+Editar produto
+Administrador edita dados e arquivos associados ao produto.
+RF005
+Ativar/desativar produto
+Administrador define se o produto fica visível no cardápio.
+RF006
+Listar produtos no cardápio
+Cliente visualiza produtos e categorias disponíveis.
+RF007
+Filtrar por categoria
+Cliente filtra produtos por categoria.
+RF008
+Visualizar produto em 3D
+Cliente abre o visualizador 3D e interage com o modelo (rotação e zoom).
+4.2 REQUISITOS NÃO FUNCIONAIS
+ID
+Nome
+Descrição
+RNF001
+Responsividade
+O 
+sistema
+ 
+deve
+ se 
+adaptar
+ a 
+dispositivos
+ 
+móveis
+ e desktop.
+RNF002
+Performance 3D
+Modelos
+ 3D 
+devem
+ ser 
+otimizados
+ para 
+carregamento
+ em tempo 
+aceitável
+.
+RNF003
+Segurança
+Acesso
+ 
+ao
+ 
+painel
+ 
+administrador
+ 
+deve
+ 
+exigir
+ 
+autenticação
+ e 
+rotas
+ 
+protegidas
+.
+RNF004
+Usabilidade
+Fluxos simples, feedback de erro e consistência visual.
+RNF005
+Acessibilidade
+Aplicar no mínimo duas melhorias de acessibilidade (seção 6).
+5 PROTOTIPAÇÃO DE TELAS
+As telas implementadas devem corresponder aos protótipos aprovados. Recomenda-se anexar imagens dos protótipos como apêndice.
+5.1 TELAS DO MÓDULO CLIENTE
+Cardápio (listagem)
+Tela de detalhes do produto (imagem, descrição e botão para 3D)
+Visualização 3D do produto (Three.js)
+QR Code (apontando para o cardápio)
+Login/Cadastro do cliente (somente se permanecer no escopo)
+5.2 TELAS DO MÓDULO ADMINISTRADOR
+Login do administrador
+Dashboard (listagem de produtos)
+Cadastro/Edição de produto
+Cadastro/Edição de categoria
+6 VALIDAÇÕES E ACESSIBILIDADE
+6.1 VALIDAÇÕES DE CAMPOS
+Validar campos obrigatórios (nome, preço, categoria) antes de enviar.
+Validar formato de e-mail em telas de login.
+Validar preço como número positivo com duas casas decimais.
+Validar upload: tipos permitidos (imagem: JPG/PNG; 3D: GLB/GLTF) e tamanho máximo.
+6.2 ACESSIBILIDADE (MÍNIMO 2 IMPLEMENTAÇÕES)
+Adicionar textos alternativos (atributo alt) em imagens de produtos e ícones relevantes.
+Garantir navegação por teclado (tab) em formulários e botões principais.
+Aplicar contraste adequado entre texto e fundo.
+Mensagens de erro associadas ao campo (aria-describedby) e foco automático no campo com erro.
+7 
+Modelo Entidade-Relacionamento (MER)
+O Modelo Entidade-Relacionamento (MER) do 
+sistema
+ 
+MenuVR
+ 
+descreve
+ as 
+entidades
+ fundamentais, seus atributos e os relacionamentos necessários para suportar o funcionamento do cardápio digital com visualização 3D e do painel administrativo.
+O modelo foi desenvolvido considerando princípios de normalização, integridade referencial e rastreabilidade das ações administrativas.
+7
+.1.1 Entidades
+7
+.1.1.1 Administradores
+Representa os usuários responsáveis pelo gerenciamento do cardápio.
+Atributos:
+id (PK, INT): identificador único do administrador.
+nome (VARCHAR): nome completo do administrador.
+email (VARCHAR, UNIQUE): endereço de e-mail exclusivo no sistema.
+senha_hash
+ (VARCHAR): hash 
+criptografado
+ da senha.
+perfil (VARCHAR): nível de acesso.
+ativo (BOOLEAN): indica se o usuário está ativo.
+criado_em
+ (DATETIME): data e hora de criação.
+atualizado_em
+ (DATETIME): data e hora da 
+última
+ 
+atualização
+.
+7
+.1.1.2 Categorias
+Representa as categorias que organizam os produtos do cardápio.
+Atributos:
+id (PK, INT): identificador único da categoria.
+nome (VARCHAR, UNIQUE): nome da categoria.
+descricao
+ (TEXT): 
+descrição
+ 
+opcional
+.
+ativo (BOOLEAN): indica se a categoria está ativa.
+criado_por
+ (FK → Administradores.id): administrador que criou o registro.
+atualizado_por
+ (FK → Administradores.id): administrador que realizou a última atualização.
+criado_em
+ (DATETIME): data e hora de criação.
+atualizado_em
+ (DATETIME): data e hora da última atualização.
+7
+.1.1.3 Produtos
+Representa os itens exibidos no cardápio digital, podendo conter modelo 3D para visualização interativa.
+Atributos:
+id (PK, INT): identificador único do produto.
+categoria_id
+ (FK → Categorias.id): categoria à qual o produto pertence.
+nome (VARCHAR): nome do produto.
+descricao
+ (TEXT): 
+descrição
+ do produto.
+preco
+ (
+DECIMAL(
+10,2)): valor 
+monetário
+ do produto.
+imagem_url
+ (VARCHAR): 
+endereço
+ da imagem do produto.
+modelo3d_url (VARCHAR): endereço do arquivo 3D.
+formato_modelo3d (VARCHAR): formato do modelo 3D (ex.: 
+glb
+ 
+ou
+ 
+gltf
+).
+possui_modelo3d (BOOLEAN): indica 
+a
+ existência de modelo 3D.
+ativo (BOOLEAN): indica se o produto está disponível.
+criado_por
+ (FK → Administradores.id): administrador que criou o registro.
+atualizado_por
+ (FK → Administradores.id): administrador responsável pela última atualização.
+criado_em
+ (DATETIME): data e hora de criação.
+atualizado_em
+ (DATETIME): data e hora da última atualização.
+7
+.1.2 Relacionamentos
+O sistema apresenta os seguintes relacionamentos:
+a) Categorias e Produtos (1:N)
+Uma categoria pode conter vários produtos.
+Cada produto pertence obrigatoriamente a uma única categoria.
+b) Administradores e Categorias (1:N)
+Um administrador pode criar e atualizar várias categorias.
+Cada categoria deve possuir um criador registrado.
+c) Administradores e Produtos (1:N)
+Um administrador pode criar e atualizar vários produtos.
+Cada produto deve possuir um criador registrado.
+7
+.1.3 Regras de Negócio
+O e-mail do administrador deve ser único.
+O nome da categoria deve ser único.
+Um produto não pode existir sem categoria associada.
+O preço do produto deve ser maior que zero.
+O modelo 3D é opcional.
+O campo ativo permite desativação lógica (soft delete).
+7.
+2
+ DICIONÁRIO DE DADOS
+Tabela
+Campo
+Tipo
+Obrig.
+Descrição
+admin_users
+id
+INT (PK)
+Sim
+Identificador do administrador.
+admin_users
+email
+VARCHAR(120)
+Sim
+E-mail de login (único).
+admin_users
+password_hash
+VARCHAR(255)
+Sim
+Hash da senha.
+admin_users
+created_at
+DATETIME
+Sim
+Data/hora de criação.
+categories
+id
+INT (PK)
+Sim
+Identificador da categoria.
+categories
+name
+VARCHAR(80)
+Sim
+Nome da categoria.
+categories
+is_active
+TINYINT
+Sim
+1 = ativa, 0 = inativa.
+products
+id
+INT (PK)
+Sim
+Identificador do produto.
+products
+category_id
+INT (FK)
+Sim
+Referência para categories.id.
+products
+name
+VARCHAR(120)
+Sim
+Nome do produto.
+products
+description
+TEXT
+Não
+Descrição do produto.
+products
+price
+DECIMAL(10,2)
+Sim
+Preço do produto.
+products
+image_url
+VARCHAR(255)
+Não
+Caminho/URL da imagem.
+products
+model3d_url
+VARCHAR(255)
+Não
+Caminho/URL do arquivo 3D.
+products
+is_active
+TINYINT
+Sim
+1 = visível, 0 = oculto.
+products
+created_at
+DATETIME
+Sim
+Data/hora de criação.
+7.
+3
+ CASOS DE USO (RESUMO)
+UC01 - Autenticar Administrador
+UC02 - Cadastrar Categoria
+UC03 - Cadastrar Produto
+UC04 - Editar Produto
+UC05 - Listar/Filtrar Cardápio
+UC06 - Visualizar Produto em 3D
+7.
+4
+ DIAGRAMA DE SEQUÊNCIA (BÔNUS) - DESCRIÇÃO
+Fluxo sugerido para o diagrama de sequência: "Cliente abre detalhes do produto e visualiza 3D". Participantes: Cliente (UI), Front-end, API (Express), Banco de Dados (MySQL) e Visualizador 3D (Three.js).
+8 PLANO DE ENTREGA - PARTICIPAÇÃO 1 (27/02)
+Para a próxima aula, serão entregues os seguintes itens:
+Apresentação e justificativa do projeto (este documento).
+Equipe e tecnologias definidas para implementação.
+Implementação das telas prototipadas (HTML, CSS e JavaScript) com navegação funcional.
+Validações de campos de entrada nos formulários.
+Acessibilidade: no mínimo duas implementações aplicadas e demonstráveis.
+Documentação adicional (DER, MER, dicionário de dados, casos de uso) e, como bônus, diagrama de sequência.
+9 CONCLUSÃO
+O MenuVR foi delimitado para priorizar a entrega de um cardápio digital com visualização 3D e um painel administrativo para manutenção do cardápio, tornando o projeto viável e consistente para o contexto acadêmico. A arquitetura proposta permite expansão futura, caso haja tempo e maturidade técnica, para módulos como pedidos e pagamentos.
+REFERÊNCIAS
+ATENÇÃO: Ajustar as referências conforme a NBR 6023:2018 (formato ABNT) e incluir URL e data de acesso para fontes online.
+WORLD WIDE WEB CONSORTIUM (W3C). HTML5. Disponível em: <https://www.w3.org/>. Acesso em: __ ____. 2025.
+MDN WEB DOCS. Documentação JavaScript. Disponível em: <https://developer.mozilla.org/>. Acesso em: __ ____. 2025.
+THREE.JS. Documentação. Disponível em: <https://threejs.org/>. Acesso em: __ ____. 2025.
+NODE.JS. Documentação. Disponível em: <https://nodejs.org/>. Acesso em: __ ____. 2025.
+EXPRESS. Documentação. Disponível em: <https://expressjs.com/>. Acesso em: __ ____. 2025.
+MYSQL. Documentação. Disponível em: <https://dev.mysql.com/doc/>. Acesso em: __ ____. 2025.
+APÊNDICE A – DIAGRAMA ENTIDADE-RELACIONAMENTO
+ 
+O 
+Apêndice
+ A 
+apresenta
+ o 
+Diagrama
+ 
+Entidade-Relacionamento
+ do 
+sistema
+ 
+MenuVR
+, 
+evidenciando
+ as 
+entidades
+, 
+atributos
+ e 
+relacionamentos
+ 
+definidos
+ 
+na
+ 
+modelagem
+ do banco de dados.
+Figura
+ 1 – 
+Diagrama
+ 
+Entidade-Relacionamento
+ do Sistema 
+MenuVR
+.
+Fonte: 
+Elaborado
+ 
+pelos
+ 
+autores
+ (2026).
+APÊNDICE B – DIAGRAMA DE CASO DE USO (UML)
+ 
+Este 
+apêndice
+ 
+apresenta
+ o 
+Diagrama
+ de Caso de Uso (UML) do 
+sistema
+ 
+MenuVR
+, 
+descrevendo
+ as 
+principais
+ 
+funcionalidades
+ 
+Figura
+ 2 – 
+Diagrama
+ de Caso de Uso (UML) do Sistema 
+MenuVR
+.
+Fonte: 
+Elaborado
+ 
+pelos
+ 
+autores
+ (2026).

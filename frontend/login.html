@@ -538,6 +538,23 @@
                 width: 72%;
             }
         }
+
+        /* ── Logo ── */
+        .logo-wrap {
+            position: absolute;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+        }
+
+        .logo-wrap img {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 0 15px rgba(21, 101, 216, 0.4));
+        }
     </style>
 </head>
 
@@ -656,6 +673,10 @@
 
     <footer class="burger-footer">
         <a href="esqueci-senha.html" class="link-forgot">Esqueci minha senha</a>
+        <div style="margin: 15px 0;">
+            <span style="color: var(--text-muted); font-size: 0.88rem;">Novo por aqui? </span>
+            <a href="cadastro-cliente.html" style="color: var(--blue-vibrant); text-decoration: none; font-weight: 700; font-size: 0.95rem; border-bottom: 1px solid var(--blue-vibrant); padding-bottom: 2px;">Cadastre-se</a>
+        </div>
         <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
     </footer>
 
