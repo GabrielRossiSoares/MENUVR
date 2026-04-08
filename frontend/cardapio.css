@@ -142,7 +142,7 @@ body.theme-bebidas #canvas-container { background-color: var(--theme-bebidas); }
     z-index: 1;
     background-color: var(--bg-color); /* Atualizado via temas */
     transition: background-color var(--transition-slow);
-    pointer-events: auto;
+    pointer-events: auto; /* IMPORTANTE: Permite o clique no 3D */
 }
 canvas {
     display: block;

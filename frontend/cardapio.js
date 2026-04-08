@@ -262,6 +262,43 @@ function initThreeJS() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     canvasContainer.appendChild(renderer.domElement);
+
+    // --- LOGICA DE CLIQUE EM AR ---
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    function onModelClick(event) {
+        // Calcula posição do mouse (-1 a +1)
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        
+        // Verifica interseção com os modelos
+        const intersects = raycaster.intersectObjects(scene.children, true);
+
+        if (intersects.length > 0) {
+            const arViewer = document.querySelector('#ar-trigger');
+            if (arViewer) {
+                // Ativa a Realidade Aumentada imediatamente
+                arViewer.activateAR();
+            }
+        }
+    }
+
+    // Feedback visual (cursor pointer ao passar sobre o lanche)
+    function onMouseMove(event) {
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(scene.children, true);
+        
+        canvasContainer.style.cursor = intersects.length > 0 ? 'pointer' : 'default';
+    }
+
+    window.addEventListener('click', onModelClick);
+    window.addEventListener('mousemove', onMouseMove);
     
     scene.add(new THREE.AmbientLight(0xffffff, 0.8));
     const dirLight = new THREE.DirectionalLight(0xffffff, 1);
