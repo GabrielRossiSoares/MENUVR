@@ -29,13 +29,21 @@
             <button class="cat-btn" data-target="#section-drinks">Drinks</button>
             <button class="cat-btn" data-target="#section-bebidas">Bebidas</button>
         </div>
-        <div class="cart-icon" id="cart-trigger">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-            </svg>
-            <span class="cart-badge">0</span>
+        <div class="nav-actions">
+            <div class="cart-icon" id="cart-trigger">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="cart-badge">0</span>
+            </div>
+            <div class="login-icon" id="login-trigger" title="Entrar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
         </div>
     </header>
 
@@ -70,6 +78,40 @@
         </div>
     </div>
     <div id="modal-overlay" class="modal-overlay"></div>
+
+    <!-- Modal de Detalhes do Produto (Fullscreen) -->
+    <div id="product-detail-modal" class="pd-modal">
+        <div class="pd-modal-content">
+            <button class="pd-close" id="pd-close">&times;</button>
+            <div class="pd-header">
+                <h2 class="pd-title">Detalhes Do Produto</h2>
+            </div>
+            <div class="pd-body" id="pd-body">
+                <!-- Renderizado via JS -->
+            </div>
+            <div class="pd-footer">
+                <div class="pd-qty-controls">
+                    <button class="pd-qty-btn" id="pd-minus">−</button>
+                    <span class="pd-qty-value" id="pd-qty">1</span>
+                    <button class="pd-qty-btn" id="pd-plus">+</button>
+                </div>
+                <button class="pd-add-btn" id="pd-add-btn">Adicionar (R$ 0,00)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer do Restaurante -->
+    <footer id="restaurant-footer" class="restaurant-footer">
+        <!-- Renderizado via JS -->
+    </footer>
+
+    <!-- Banner de Cookies (LGPD) -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <p>Este website está em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD)</strong> e utiliza cookies para oferecer uma melhor experiência ao visitante.</p>
+            <button id="cookie-accept" class="cookie-accept-btn">Concordo</button>
+        </div>
+    </div>
 
     <!-- Bibliotecas Externas para Scrollytelling e 3D -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

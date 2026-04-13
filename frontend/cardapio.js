@@ -4,49 +4,66 @@
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-// --- 1. DADOS TOTAIS DO CARDÁPIO (Transcrição da Imagem) ---
+// --- 1. DADOS TOTAIS DO CARDÁPIO ---
+const defaultExtras = [
+    { name: "Cebola Roxa", price: 2.00 },
+    { name: "Bacon Extra", price: 4.00 },
+    { name: "Queijo Cheddar", price: 3.00 },
+    { name: "Queijo Prato", price: 3.00 },
+    { name: "Alface Americana", price: 2.50 },
+    { name: "Tomate", price: 1.99 },
+    { name: "Hambúrguer Extra (180g)", price: 12.99 },
+    { name: "Maionese da Casa Extra", price: 2.00 },
+    { name: "Picles", price: 2.50 },
+    { name: "Fatias de Bacon", price: 4.00 },
+    { name: "Cebola Caramelizada", price: 3.99 },
+    { name: "Molho Especial", price: 2.00 },
+];
+
+const cookingOptions = ["Bem Passado", "Ao Ponto", "Mal Passado"];
+
 const menuData = [
     {
         category: "Mais Pedidos",
         id: "section-mais-pedidos",
         items: [
-            { id: 1, name: "Double Bacon", price: "R$ 36,99", desc: "Pão Brioche, 02 Burguer de 180g, Queijo Cheddar, Bacon artesanal." },
-            { id: 2, name: "Classic Smash", price: "R$ 34,99", desc: "Pão Brioche, 02 Smash Burguer de 80g, Queijo cheddar, picles." },
-            { id: 3, name: "Chicken Burguer", price: "R$ 38,99", desc: "Sobrecoxa de frango empanada, Queijo, Alface e Maionese." },
-            { id: 4, name: "Burguer Salada", price: "R$ 35,99", desc: "Pão Brioche, 01 Burguer de 180g, Queijo Cheddar, Alface e Tomate." }
+            { id: 1, name: "Double Bacon", price: "R$ 36,99", desc: "Pão Brioche, 02 Burguer de 180g, Queijo Cheddar, Bacon artesanal.", extras: defaultExtras, cookingOptions },
+            { id: 2, name: "Classic Smash", price: "R$ 34,99", desc: "Pão Brioche, 02 Smash Burguer de 80g, Queijo cheddar, picles.", extras: defaultExtras, cookingOptions },
+            { id: 3, name: "Chicken Burguer", price: "R$ 38,99", desc: "Sobrecoxa de frango empanada, Queijo, Alface e Maionese.", extras: defaultExtras.slice(0, 6) },
+            { id: 4, name: "Burguer Salada", price: "R$ 35,99", desc: "Pão Brioche, 01 Burguer de 180g, Queijo Cheddar, Alface e Tomate.", extras: defaultExtras, cookingOptions }
         ]
     },
     {
         category: "Hamburguers",
         id: "section-hamburguers",
         items: [
-            { id: 5, name: "Burguer Bacon", price: "R$ 38,99", desc: "Pão Brioche, Burguer 180g, Bacon crocante e Queijo Cheddar." },
-            { id: 6, name: "Double Smash", price: "R$ 34,99", desc: "Dois discos de 80g, Queijo, Cebola, Picles e molho especial." }
+            { id: 5, name: "Burguer Bacon", price: "R$ 38,99", desc: "Pão Brioche, Burguer 180g, Bacon crocante e Queijo Cheddar.", extras: defaultExtras, cookingOptions },
+            { id: 6, name: "Double Smash", price: "R$ 34,99", desc: "Dois discos de 80g, Queijo, Cebola, Picles e molho especial.", extras: defaultExtras, cookingOptions }
         ]
     },
     {
         category: "Combos",
         id: "section-combos",
         items: [
-            { id: 7, name: "Combo 1", price: "R$ 49,99", desc: "Lanche + Batata Frita 150g + Suco de Morango 500ml." },
-            { id: 8, name: "Combo 2", price: "R$ 60,99", desc: "Dois Lanches + Batata Frita 250g + Coca-cola Lata." }
+            { id: 7, name: "Combo 1", price: "R$ 49,99", desc: "Lanche + Batata Frita 150g + Suco de Morango 500ml.", extras: defaultExtras.slice(0, 4), cookingOptions },
+            { id: 8, name: "Combo 2", price: "R$ 60,99", desc: "Dois Lanches + Batata Frita 250g + Coca-cola Lata.", extras: defaultExtras.slice(0, 4), cookingOptions }
         ]
     },
     {
         category: "Sobremesas",
         id: "section-sobremesas",
         items: [
-            { id: 9, name: "Pudim", price: "R$ 25,99", desc: "Pudim de leite condensado 50g com Blueberries frescos." },
-            { id: 10, name: "Trio de Sobremesas", price: "R$ 60,99", desc: "Três mini sobremesas do chef para compartilhar." }
+            { id: 9, name: "Pudim", price: "R$ 25,99", desc: "Pudim de leite condensado 50g com Blueberries frescos.", extras: [{ name: "Calda Extra", price: 2.00 }, { name: "Chantilly", price: 3.00 }] },
+            { id: 10, name: "Trio de Sobremesas", price: "R$ 60,99", desc: "Três mini sobremesas do chef para compartilhar.", extras: [{ name: "Calda Extra", price: 2.00 }] }
         ]
     },
     {
         category: "Drinks",
         id: "section-drinks",
         items: [
-            { id: 11, name: "Caipirinha", price: "R$ 45,99", desc: "Caipirinha de limão tradicional com cachaça 500ml." },
-            { id: 12, name: "Piña Colada", price: "R$ 40,99", desc: "Piña Colada refrescante de abacaxi 450ml." },
-            { id: 13, name: "Moscow Mule", price: "R$ 50,99", desc: "Vodka, suco de limão e espuma de gengibre artesanal." }
+            { id: 11, name: "Caipirinha", price: "R$ 45,99", desc: "Caipirinha de limão tradicional com cachaça 500ml.", extras: [{ name: "Dose Extra", price: 8.00 }] },
+            { id: 12, name: "Piña Colada", price: "R$ 40,99", desc: "Piña Colada refrescante de abacaxi 450ml.", extras: [{ name: "Dose Extra", price: 8.00 }] },
+            { id: 13, name: "Moscow Mule", price: "R$ 50,99", desc: "Vodka, suco de limão e espuma de gengibre artesanal.", extras: [{ name: "Dose Extra", price: 8.00 }] }
         ]
     },
     {
@@ -59,6 +76,15 @@ const menuData = [
         ]
     }
 ];
+
+// --- 1.1 DADOS DO RESTAURANTE ---
+const restaurantInfo = {
+    name: "Menu VR",
+    address: "Campo Grande, MS",
+    phone: "(67) 99999-8888",
+    hours: "Seg-Sex: 18h-23h | Sáb-Dom: 11h-23h",
+    instagram: "@menuvr"
+};
 
 // --- 1.1 ESTADO DO CARRINHO ---
 const cart = {
@@ -116,14 +142,7 @@ function renderHTML() {
             minus.addEventListener('click', () => { if(currentQty > 1) currentQty--; valElem.textContent = currentQty; });
 
             addBtn.addEventListener('click', () => {
-                addToCart(item, currentQty);
-                const originalText = addBtn.innerText;
-                addBtn.innerText = "✓ Adicionado";
-                addBtn.classList.add('added');
-                setTimeout(() => {
-                    addBtn.innerText = originalText;
-                    addBtn.classList.remove('added');
-                }, 1500);
+                openProductDetail(item);
             });
         });
     });
@@ -467,9 +486,266 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavBar();
     initCartModal();
     initThreeJS();
-    
+    initCookieBanner();
+    initLoginBtn();
+    initProductDetailModal();
+    renderRestaurantFooter();
+
     window.addEventListener('scroll', () => {
         const hint = document.querySelector('.scroll-hint');
-        if(hint && window.scrollY > 50) hint.style.opacity = '0';
+        if (hint && window.scrollY > 50) hint.style.opacity = '0';
     });
 });
+
+// ─── FEATURE 1: COOKIE BANNER (LGPD) ─────────────────────────────────────────
+function initCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('cookie-accept');
+    if (!banner || !acceptBtn) return;
+
+    if (localStorage.getItem('cookiesAccepted')) {
+        banner.classList.add('hidden');
+        return;
+    }
+
+    acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        banner.classList.add('hidden');
+    });
+}
+
+// ─── FEATURE 2: BOTÃO ENTRAR ─────────────────────────────────────────────────
+function initLoginBtn() {
+    const loginTrigger = document.getElementById('login-trigger');
+    if (!loginTrigger) return;
+    loginTrigger.addEventListener('click', () => {
+        window.location.href = 'login.html';
+    });
+}
+
+// ─── FEATURE 3: FOOTER DO RESTAURANTE ────────────────────────────────────────
+function renderRestaurantFooter() {
+    const footer = document.getElementById('restaurant-footer');
+    if (!footer) return;
+
+    const phone = restaurantInfo.phone.replace(/[^\d]/g, '');
+
+    footer.innerHTML = `
+        <img src="assets/Logo.svg" alt="Logo ${restaurantInfo.name}" class="footer-logo">
+        <h2 class="footer-name">${restaurantInfo.name}</h2>
+        <div class="footer-info">
+            <div class="footer-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>${restaurantInfo.address}</span>
+            </div>
+            <div class="footer-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.21 3.18 2 2 0 0 1 3.22 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.1a16 16 0 0 0 6 6l.56-.56a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 16z"/></svg>
+                <a href="https://wa.me/55${phone}" target="_blank">${restaurantInfo.phone}</a>
+            </div>
+            <div class="footer-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span>${restaurantInfo.hours}</span>
+            </div>
+            <div class="footer-info-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <span>${restaurantInfo.instagram}</span>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <p class="footer-credits">Feito com <span>❤</span> por BG Tech Solutions</p>
+    `;
+}
+
+// ─── FEATURE 4: MODAL DE DETALHES DO PRODUTO ─────────────────────────────────
+let currentProductItem = null;
+let pdExtrasState = {};
+let pdQty = 1;
+
+function initProductDetailModal() {
+    const modal = document.getElementById('product-detail-modal');
+    const closeBtn = document.getElementById('pd-close');
+    const minusBtn = document.getElementById('pd-minus');
+    const plusBtn = document.getElementById('pd-plus');
+    const qtyDisplay = document.getElementById('pd-qty');
+    const addBtn = document.getElementById('pd-add-btn');
+    if (!modal) return;
+
+    closeBtn.addEventListener('click', closeProductDetail);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeProductDetail();
+    });
+
+    minusBtn.addEventListener('click', () => {
+        if (pdQty > 1) pdQty--;
+        qtyDisplay.textContent = pdQty;
+        updatePDAddBtn();
+    });
+
+    plusBtn.addEventListener('click', () => {
+        pdQty++;
+        qtyDisplay.textContent = pdQty;
+        updatePDAddBtn();
+    });
+
+    addBtn.addEventListener('click', () => {
+        if (!currentProductItem) return;
+
+        const obsEl = document.getElementById('pd-obs');
+        const observations = obsEl ? obsEl.value.trim() : '';
+
+        const selectedExtras = Object.entries(pdExtrasState)
+            .filter(([, qty]) => qty > 0)
+            .map(([name, qty]) => {
+                const extra = currentProductItem.extras.find(e => e.name === name);
+                return { name, qty, price: extra ? extra.price : 0 };
+            });
+
+        const totalExtras = selectedExtras.reduce((sum, e) => sum + e.price * e.qty, 0);
+        const basePrice = parseFloat(currentProductItem.price.replace('R$ ', '').replace(',', '.'));
+        const unitTotal = basePrice + totalExtras;
+
+        const cartItem = {
+            ...currentProductItem,
+            qty: pdQty,
+            extras: selectedExtras,
+            observations,
+            unitTotal,
+            price: `R$ ${unitTotal.toFixed(2).replace('.', ',')}`
+        };
+
+        addToCart(cartItem, pdQty);
+        closeProductDetail();
+
+        const btn = document.getElementById('pd-add-btn');
+        if (btn) {
+            btn.textContent = '✓ Adicionado!';
+            setTimeout(() => updatePDAddBtn(), 1500);
+        }
+    });
+}
+
+function openProductDetail(item) {
+    currentProductItem = item;
+    pdExtrasState = {};
+    pdQty = 1;
+
+    const modal = document.getElementById('product-detail-modal');
+    const body = document.getElementById('pd-body');
+    const qtyDisplay = document.getElementById('pd-qty');
+    if (!modal || !body) return;
+
+    qtyDisplay.textContent = 1;
+
+    const basePrice = parseFloat(item.price.replace('R$ ', '').replace(',', '.'));
+
+    let html = `
+        <h2 class="pd-product-name">${item.name}</h2>
+        <p class="pd-product-desc">${item.desc}</p>
+        <p class="pd-product-price">${item.price}</p>
+    `;
+
+    // Extras / Adicionais
+    if (item.extras && item.extras.length > 0) {
+        item.extras.forEach(e => { pdExtrasState[e.name] = 0; });
+
+        html += `
+            <div class="pd-section-title">
+                <h3>Adicionais 🔍</h3>
+                <span class="pd-section-badge">0/${item.extras.length}</span>
+            </div>
+            <p class="pd-section-hint">Escolha entre 0 e ${item.extras.length} opções</p>
+        `;
+
+        item.extras.forEach(extra => {
+            html += `
+                <div class="pd-extra-item" data-extra-name="${extra.name}">
+                    <div class="pd-extra-info">
+                        <span class="pd-extra-name">${extra.name}</span>
+                        <span class="pd-extra-price">+R$ ${extra.price.toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div class="pd-extra-qty">
+                        <button class="pd-extra-minus" data-name="${extra.name}">−</button>
+                        <span class="pd-extra-count" data-name="${extra.name}">0</span>
+                        <button class="pd-extra-plus" data-name="${extra.name}">+</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Ponto da Carne
+    if (item.cookingOptions && item.cookingOptions.length > 0) {
+        html += `
+            <div class="pd-section-title">
+                <h3>Ponto da carne</h3>
+                <span class="pd-section-badge">OBRIGATÓRIO</span>
+            </div>
+            <p class="pd-section-hint">Escolha 1 opção</p>
+            <div class="pd-radio-group">
+        `;
+        item.cookingOptions.forEach((opt, idx) => {
+            html += `
+                <label class="pd-radio-item">
+                    <input type="radio" name="cooking" value="${opt}" ${idx === 0 ? 'checked' : ''}>
+                    <span class="pd-radio-label">${opt}</span>
+                </label>
+            `;
+        });
+        html += `</div>`;
+    }
+
+    // Observações
+    html += `
+        <div class="pd-obs-section">
+            <h3>💬 Alguma Observação?</h3>
+            <textarea id="pd-obs" class="pd-obs-textarea" placeholder="Inclua uma observação sobre o pedido."></textarea>
+        </div>
+    `;
+
+    body.innerHTML = html;
+
+    // Wire up extra +/- buttons
+    body.querySelectorAll('.pd-extra-plus').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.dataset.name;
+            pdExtrasState[name] = (pdExtrasState[name] || 0) + 1;
+            body.querySelector(`.pd-extra-count[data-name="${name}"]`).textContent = pdExtrasState[name];
+            updatePDAddBtn();
+        });
+    });
+
+    body.querySelectorAll('.pd-extra-minus').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.dataset.name;
+            if (pdExtrasState[name] > 0) pdExtrasState[name]--;
+            body.querySelector(`.pd-extra-count[data-name="${name}"]`).textContent = pdExtrasState[name];
+            updatePDAddBtn();
+        });
+    });
+
+    updatePDAddBtn();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeProductDetail() {
+    const modal = document.getElementById('product-detail-modal');
+    if (modal) modal.classList.remove('active');
+    document.body.style.overflow = '';
+    currentProductItem = null;
+}
+
+function updatePDAddBtn() {
+    if (!currentProductItem) return;
+    const btn = document.getElementById('pd-add-btn');
+    if (!btn) return;
+
+    const basePrice = parseFloat(currentProductItem.price.replace('R$ ', '').replace(',', '.'));
+    const extrasTotal = Object.entries(pdExtrasState).reduce((sum, [name, qty]) => {
+        const extra = currentProductItem.extras ? currentProductItem.extras.find(e => e.name === name) : null;
+        return sum + (extra ? extra.price * qty : 0);
+    }, 0);
+
+    const total = (basePrice + extrasTotal) * pdQty;
+    btn.textContent = `Adicionar (R$ ${total.toFixed(2).replace('.', ',')})`;
+}

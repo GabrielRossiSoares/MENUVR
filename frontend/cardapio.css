@@ -508,3 +508,467 @@ body.cart-open .a11y-widget {
         opacity: 0; /* Some para não atrapalhar o checkout total no mobile */
     }
 }
+
+/* ═══════════════════════════════════════
+   NAV ACTIONS (Carrinho + Login)
+═══════════════════════════════════════ */
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.login-icon {
+    position: relative;
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: var(--text-primary);
+    opacity: 0.6;
+}
+.login-icon:hover { opacity: 1; transform: scale(1.1); }
+.login-icon:active { transform: scale(0.95); }
+
+/* ═══════════════════════════════════════
+   COOKIE BANNER (LGPD)
+═══════════════════════════════════════ */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background: rgba(20, 20, 30, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 24px;
+    transform: translateY(0);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cookie-banner.hidden {
+    transform: translateY(100%);
+    pointer-events: none;
+}
+
+.cookie-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+.cookie-content p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    flex: 1;
+}
+.cookie-content p strong {
+    color: #fff;
+}
+
+.cookie-accept-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(210, 4, 45, 0.3);
+}
+.cookie-accept-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(210, 4, 45, 0.45);
+}
+
+@media (max-width: 600px) {
+    .cookie-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    .cookie-accept-btn {
+        width: 100%;
+    }
+}
+
+/* ═══════════════════════════════════════
+   PRODUCT DETAIL MODAL (Fullscreen)
+═══════════════════════════════════════ */
+.pd-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+.pd-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pd-modal-content {
+    background: #fff;
+    width: 100%;
+    max-width: 520px;
+    max-height: 92vh;
+    border-radius: 24px 24px 0 0;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+.pd-modal.active .pd-modal-content {
+    transform: translateY(0);
+}
+
+.pd-close {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.06);
+    border: none;
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s;
+}
+.pd-close:hover { background: rgba(0, 0, 0, 0.12); }
+
+.pd-header {
+    padding: 20px 24px 12px;
+    text-align: center;
+}
+.pd-title {
+    font-family: var(--font-ui);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.pd-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 24px 24px;
+}
+
+/* Product info in modal */
+.pd-product-name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.pd-product-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+.pd-product-price {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+/* Section titles inside modal */
+.pd-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+    margin-bottom: 4px;
+}
+.pd-section-title h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+.pd-section-badge {
+    background: rgba(210, 4, 45, 0.1);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.pd-section-hint {
+    font-size: 0.8rem;
+    color: var(--text-fade);
+    margin-bottom: 14px;
+}
+
+/* Extras (add-ons) row */
+.pd-extra-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.pd-extra-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+.pd-extra-name {
+    font-size: 0.92rem;
+    font-weight: 500;
+}
+.pd-extra-price {
+    background: #22c55e;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+.pd-extra-qty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pd-extra-qty button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(0, 0, 0, 0.15);
+    background: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    color: var(--text-primary);
+}
+.pd-extra-qty button:hover { background: rgba(0, 0, 0, 0.05); }
+.pd-extra-qty span {
+    width: 20px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Radio options (ponto da carne etc) */
+.pd-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.pd-radio-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+.pd-radio-item input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+.pd-radio-item input[type="radio"]:checked {
+    border-color: var(--accent);
+}
+.pd-radio-item input[type="radio"]:checked::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+.pd-radio-label {
+    font-size: 0.92rem;
+    font-weight: 500;
+    flex: 1;
+}
+
+/* Observations textarea */
+.pd-obs-section {
+    margin-top: 24px;
+}
+.pd-obs-section h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.pd-obs-textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 14px 16px;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    resize: vertical;
+    transition: border-color 0.2s;
+    outline: none;
+}
+.pd-obs-textarea::placeholder { color: var(--text-fade); }
+.pd-obs-textarea:focus { border-color: var(--accent); }
+
+/* Footer bar in modal */
+.pd-footer {
+    padding: 16px 24px;
+    background: #fff;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 0 0 0 0;
+}
+.pd-qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 4px;
+}
+.pd-qty-btn {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: transparent;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 10px;
+    color: var(--text-primary);
+    transition: background 0.2s;
+}
+.pd-qty-btn:hover { background: rgba(0, 0, 0, 0.08); }
+.pd-qty-value {
+    width: 28px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.pd-add-btn {
+    flex: 1;
+    padding: 16px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(210, 4, 45, 0.25);
+}
+.pd-add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(210, 4, 45, 0.4);
+}
+
+/* ═══════════════════════════════════════
+   RESTAURANT FOOTER
+═══════════════════════════════════════ */
+.restaurant-footer {
+    position: relative;
+    z-index: 50;
+    background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+    color: rgba(255, 255, 255, 0.85);
+    padding: 50px 24px 30px;
+    text-align: center;
+    pointer-events: auto;
+}
+
+.footer-logo {
+    width: 80px;
+    height: auto;
+    margin: 0 auto 16px;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+}
+
+.footer-name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.footer-info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+.footer-info-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+.footer-info-item a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-info-item a:hover { color: #fff; }
+
+.footer-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 20px auto;
+}
+
+.footer-credits {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.35);
+}
+.footer-credits span {
+    color: var(--accent);
+}
