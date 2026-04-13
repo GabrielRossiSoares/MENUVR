@@ -470,7 +470,7 @@ window.addEventListener('resize', () => {
             let zOffset = 0;
 
             if (width < 600) {
-                xOffset = 0; yOffset = 1.8; zOffset = 1.5;
+                xOffset = 0; yOffset = 0.5; zOffset = 1.5;
             } else if (width < 1024) {
                 xOffset = 1.8; yOffset = 0.5; zOffset = 0.5;
             }
