@@ -503,10 +503,14 @@ function initCookieBanner() {
     const acceptBtn = document.getElementById('cookie-accept');
     if (!banner || !acceptBtn) return;
 
-    if (localStorage.getItem('cookiesAccepted')) {
+    // Se já aceitou antes, esconde o banner
+    if (localStorage.getItem('cookiesAccepted') === 'true') {
         banner.classList.add('hidden');
         return;
     }
+
+    // Garante que o banner está visível (sem a classe hidden)
+    banner.classList.remove('hidden');
 
     acceptBtn.addEventListener('click', () => {
         localStorage.setItem('cookiesAccepted', 'true');
@@ -726,6 +730,9 @@ function openProductDetail(item) {
     updatePDAddBtn();
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
+    // Desativa o canvas 3D enquanto o modal está aberto para não bloquear toques
+    const canvas = document.getElementById('canvas-container');
+    if (canvas) canvas.style.pointerEvents = 'none';
 }
 
 function closeProductDetail() {
@@ -733,6 +740,9 @@ function closeProductDetail() {
     if (modal) modal.classList.remove('active');
     document.body.style.overflow = '';
     currentProductItem = null;
+    // Reativa o canvas 3D
+    const canvas = document.getElementById('canvas-container');
+    if (canvas) canvas.style.pointerEvents = 'auto';
 }
 
 function updatePDAddBtn() {

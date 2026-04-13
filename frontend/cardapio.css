@@ -510,25 +510,43 @@ body.cart-open .a11y-widget {
 }
 
 /* ═══════════════════════════════════════
-   NAV ACTIONS (Carrinho + Login)
+   BOTÃO ENTRAR (Canto Superior Esquerdo - Fixo)
 ═══════════════════════════════════════ */
-.nav-actions {
+.login-fixed-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 200;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    padding: 8px 16px 8px 12px;
     display: flex;
     align-items: center;
-    gap: 4px;
-    flex-shrink: 0;
-}
-
-.login-icon {
-    position: relative;
+    gap: 8px;
     cursor: pointer;
-    padding: 8px;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     color: var(--text-primary);
-    opacity: 0.6;
+    font-family: var(--font-ui);
+    font-size: 0.85rem;
+    font-weight: 600;
+    user-select: none;
 }
-.login-icon:hover { opacity: 1; transform: scale(1.1); }
-.login-icon:active { transform: scale(0.95); }
+.login-fixed-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+    transform: translateY(-1px);
+}
+.login-fixed-btn:active {
+    transform: scale(0.97);
+}
+.login-fixed-btn svg {
+    flex-shrink: 0;
+    opacity: 0.8;
+}
 
 /* ═══════════════════════════════════════
    COOKIE BANNER (LGPD)
@@ -907,7 +925,7 @@ body.cart-open .a11y-widget {
 ═══════════════════════════════════════ */
 .restaurant-footer {
     position: relative;
-    z-index: 50;
+    z-index: 200;
     background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
     color: rgba(255, 255, 255, 0.85);
     padding: 50px 24px 30px;
