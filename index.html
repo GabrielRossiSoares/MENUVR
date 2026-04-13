@@ -19,8 +19,18 @@
     <!-- Fundo Granulado Estético (Light mode) -->
     <div class="noise-overlay"></div>
 
-    <!-- Navegação (Mantida conforme solicitação do usuário) -->
+    <!-- Navegação: [Entrar] [Categorias] [Carrinho] — Fixa no topo -->
     <header class="top-nav">
+        <!-- Botão Entrar (esquerda) -->
+        <div class="login-nav-pill" id="login-trigger" title="Entrar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Entrar</span>
+        </div>
+
+        <!-- Carrossel de Categorias (centro, scrollável) -->
         <div class="categories-bar">
             <button class="cat-btn active" data-target="#section-mais-pedidos">Mais Pedidos</button>
             <button class="cat-btn" data-target="#section-hamburguers">Hamburguers</button>
@@ -29,8 +39,10 @@
             <button class="cat-btn" data-target="#section-drinks">Drinks</button>
             <button class="cat-btn" data-target="#section-bebidas">Bebidas</button>
         </div>
+
+        <!-- Carrinho (direita) -->
         <div class="cart-icon" id="cart-trigger">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="9" cy="21" r="1"></circle>
                 <circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -38,15 +50,6 @@
             <span class="cart-badge">0</span>
         </div>
     </header>
-
-    <!-- Botão Entrar (canto superior esquerdo, fixo) -->
-    <div class="login-fixed-btn" id="login-trigger" title="Entrar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-            <circle cx="12" cy="7" r="4"/>
-        </svg>
-        <span>Entrar</span>
-    </div>
 
     <!-- Botão de Acessibilidade Flutuante (Injetado pelo JS, mas deixamos o estilo carregar) -->
     

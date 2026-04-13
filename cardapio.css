@@ -65,28 +65,70 @@ body.theme-bebidas #canvas-container { background-color: var(--theme-bebidas); }
 ------------------------------ */
 .top-nav {
     position: fixed;
-    top: 20px;
+    top: 16px;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
+    width: 93%;
     max-width: 1000px;
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
     border-radius: 30px;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 8px 16px;
+    gap: 0;
+    padding: 6px 8px 6px 10px;
     z-index: 100;
+    overflow: hidden;
+}
+
+/* Pill do botao Entrar (esquerda da navbar) */
+.login-nav-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px 6px 10px;
+    border-radius: 22px;
+    background: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: var(--text-primary);
+    transition: background 0.2s;
+    margin-right: 4px;
+    border: 1px solid rgba(0,0,0,0.06);
+}
+.login-nav-pill:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+.login-nav-pill svg {
+    opacity: 0.75;
+    flex-shrink: 0;
+}
+
+/* Separador visual entre Entrar e categorias */
+.login-nav-pill::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 18px;
+    background: rgba(0,0,0,0.1);
+    margin-left: 12px;
+    flex-shrink: 0;
 }
 
 .categories-bar {
     display: flex;
     overflow-x: auto;
-    gap: 12px;
+    gap: 4px;
     scrollbar-width: none;
+    flex: 1;
+    min-width: 0;
 }
 .categories-bar::-webkit-scrollbar { display: none; }
 
@@ -94,28 +136,30 @@ body.theme-bebidas #canvas-container { background-color: var(--theme-bebidas); }
     background: transparent;
     border: none;
     font-family: var(--font-ui);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 500;
     color: var(--text-fade);
-    padding: 8px 16px;
+    padding: 7px 14px;
     border-radius: 20px;
     white-space: nowrap;
     cursor: pointer;
     transition: all var(--transition-fast);
+    flex-shrink: 0;
 }
 
 .cat-btn.active, .cat-btn:hover {
     color: var(--text-primary);
     font-weight: 700;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.55);
 }
 
 .cart-icon {
     position: relative;
     cursor: pointer;
-    margin-left: 10px;
-    padding: 8px;
+    flex-shrink: 0;
+    padding: 8px 8px 8px 10px;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-left: 2px;
 }
 .cart-icon:active { transform: scale(1.1); }
 
