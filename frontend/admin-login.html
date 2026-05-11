@@ -2,197 +2,108 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu VR — Login Administrador</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="burger.css">
-  <style>
-    /* ── Posições específicas: 2 campos (email + senha) ── */
-    .overlay-email {
-      top: 39%;
-    }
-
-    .overlay-senha {
-      top: 54%;
-    }
-
-    .overlay-btn {
-      top: 72%;
-    }
-
-    .hints-wrap {
-      top: calc(54% + 52px);
-    }
-
-    @media (max-width:480px) {
-      .overlay-email {
-        top: 38%;
-      }
-
-      .overlay-senha {
-        top: 53%;
-      }
-
-      .overlay-btn {
-        top: 71%;
-      }
-
-      .hints-wrap {
-        top: calc(53% + 52px);
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu VR — Login Administrador</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login-split.css">
 </head>
 
 <body>
-  <!-- Raios de luz -->
-  <svg class="light-rays" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
-    <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.5" fill="none">
-      <line x1="450" y1="450" x2="0" y2="0" />
-      <line x1="450" y1="450" x2="150" y2="0" />
-      <line x1="450" y1="450" x2="300" y2="0" />
-      <line x1="450" y1="450" x2="450" y2="0" />
-      <line x1="450" y1="450" x2="600" y2="0" />
-      <line x1="450" y1="450" x2="750" y2="0" />
-      <line x1="450" y1="450" x2="900" y2="0" />
-      <line x1="450" y1="450" x2="900" y2="150" />
-      <line x1="450" y1="450" x2="900" y2="300" />
-      <line x1="450" y1="450" x2="900" y2="450" />
-      <line x1="450" y1="450" x2="900" y2="600" />
-      <line x1="450" y1="450" x2="900" y2="750" />
-      <line x1="450" y1="450" x2="900" y2="900" />
-      <line x1="450" y1="450" x2="750" y2="900" />
-      <line x1="450" y1="450" x2="600" y2="900" />
-      <line x1="450" y1="450" x2="450" y2="900" />
-      <line x1="450" y1="450" x2="300" y2="900" />
-      <line x1="450" y1="450" x2="150" y2="900" />
-      <line x1="450" y1="450" x2="0" y2="900" />
-      <line x1="450" y1="450" x2="0" y2="750" />
-      <line x1="450" y1="450" x2="0" y2="600" />
-      <line x1="450" y1="450" x2="0" y2="450" />
-      <line x1="450" y1="450" x2="0" y2="300" />
-      <line x1="450" y1="450" x2="0" y2="150" />
-    </g>
-  </svg>
+    <div class="bg-decoration bg-circle-1"></div>
+    <div class="bg-decoration bg-circle-2"></div>
 
-  <div class="logo-wrap"><img src="assets/Logo.svg" alt="Logo Menu VR"></div>
+    <div class="split-container">
+        <!-- ESQUERDA: Burger -->
+        <div class="split-left">
+            <div class="burger-playground" id="burgerPlayground">
+                <div class="drag-layer layer-pao-topo" data-layer="pao-topo"><img src="assets/pao_de_cima 1 (1).svg" alt="Pão do topo"></div>
+                <div class="drag-layer layer-carne1" data-layer="carne1"><img src="assets/Carne-queijo.svg" alt="Carne"></div>
+                <div class="drag-layer layer-tomate" data-layer="tomate"><img src="assets/Tomate.svg" alt="Tomate"></div>
+                <div class="drag-layer layer-carne2" data-layer="carne2"><img src="assets/Carne-queijo.svg" alt="Carne"></div>
+                <div class="drag-layer layer-alface" data-layer="alface"><img src="assets/Alface.svg" alt="Alface"></div>
+                <div class="drag-layer layer-pao-baixo" data-layer="pao-baixo"><img src="assets/Pao_baixo.svg" alt="Pão de baixo"></div>
+            </div>
+            <button type="button" class="btn-remontar" id="btnRemontar">🍔 Remontar</button>
+            <p class="playground-hint">Arraste as camadas do hambúrguer!</p>
+        </div>
 
-  <div class="burger-stack">
-    <div class="burger-layer layer-pao-topo"><img src="assets/pao_de_cima 1 (1).svg" alt="Pão do topo"></div>
-    <div class="burger-layer layer-carne1"><img src="assets/Carne-queijo.svg" alt=""></div>
-    <div class="burger-layer layer-tomate"><img src="assets/Tomate.svg" alt=""></div>
-    <div class="burger-layer layer-carne2"><img src="assets/Carne-queijo.svg" alt=""></div>
-    <div class="burger-layer layer-alface"><img src="assets/Alface.svg" alt=""></div>
-    <div class="burger-layer layer-pao-baixo"><img src="assets/Pao_baixo.svg" alt="Pão de baixo"></div>
+        <!-- DIREITA: Form -->
+        <div class="split-right">
+            <div class="form-card">
+                <div class="logo-area"><img src="assets/Logo.svg" alt="Logo Menu VR"></div>
+                <h1 class="form-title">Painel Administrativo</h1>
+                <p class="form-subtitle">Acesso restrito a administradores</p>
 
-    <!-- E-mail -->
-    <div class="form-overlay overlay-email">
-      <div class="input-wrap" id="wrap-email">
-        <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-          </svg></span>
-        <input type="email" id="email" class="glass-field" placeholder="E-mail do administrador" autocomplete="email">
-      </div>
-      <span class="field-msg" id="msg-email"></span>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-wrap" id="wrap-email">
+                        <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                        <input type="email" id="email" class="form-input" placeholder="E-mail do administrador" autocomplete="email">
+                    </div>
+                    <span class="field-msg" id="msg-email"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <div class="input-wrap" id="wrap-senha">
+                        <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                        <input type="password" id="senha" class="form-input" placeholder="Senha" autocomplete="current-password">
+                        <button type="button" class="eye-btn" id="toggleSenha" aria-label="Mostrar/ocultar senha">
+                            <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                    <span class="field-msg" id="msg-senha"></span>
+                    <div class="password-hints" id="senha-hints">
+                        <div class="hint" id="hint-len"><span class="hint-dot"></span> Mínimo 8 caracteres</div>
+                        <div class="hint" id="hint-upper"><span class="hint-dot"></span> 1 letra maiúscula</div>
+                        <div class="hint" id="hint-lower"><span class="hint-dot"></span> 1 letra minúscula</div>
+                        <div class="hint" id="hint-num"><span class="hint-dot"></span> 1 número</div>
+                        <div class="hint" id="hint-spec"><span class="hint-dot"></span> 1 caractere especial</div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-entrar" id="btnSubmit" disabled>Entrar</button>
+
+                <div class="form-footer">
+                    <a href="esqueci-senha.html">Esqueci minha senha</a>
+                    <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Senha -->
-    <div class="form-overlay overlay-senha">
-      <div class="input-wrap" id="wrap-senha">
-        <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg></span>
-        <input type="password" id="senha" class="glass-field" placeholder="Senha" autocomplete="current-password">
-        <button type="button" class="eye-btn" id="toggleSenha" aria-label="Mostrar/ocultar senha">
-          <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-        </button>
-      </div>
-      <span class="field-msg" id="msg-senha"></span>
+    <!-- Modal sucesso -->
+    <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <div class="modal-check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h2 class="modal-title">Login realizado<br>com sucesso!</h2>
+            <p class="modal-sub">Bem-vindo ao painel administrativo.<br>Redirecionando…</p>
+            <button type="button" class="modal-btn" id="modalOk">Continuar</button>
+        </div>
     </div>
 
-    <!-- Hints senha -->
-    <div class="password-hints-wrap hints-wrap">
-      <div class="password-hints" id="senha-hints">
-        <div class="hint" id="hint-len"> <span class="hint-dot"></span> Mínimo 8 caracteres</div>
-        <div class="hint" id="hint-upper"><span class="hint-dot"></span> 1 letra maiúscula</div>
-        <div class="hint" id="hint-lower"><span class="hint-dot"></span> 1 letra minúscula</div>
-        <div class="hint" id="hint-num"> <span class="hint-dot"></span> 1 número</div>
-        <div class="hint" id="hint-spec"> <span class="hint-dot"></span> 1 caractere especial</div>
-      </div>
-    </div>
+    <script src="burger-validate.js"></script>
+    <script src="login-split.js"></script>
+    <script>
+        (() => {
+            const states = { email: false, senha: false };
+            const btn = document.getElementById('btnSubmit');
+            const update = BurgerValidate.bindBtn(btn, states);
 
-    <!-- Botão -->
-    <div class="form-overlay overlay-btn">
-      <button type="button" class="btn-entrar" id="btnSubmit" disabled>Entrar</button>
-    </div>
-  </div>
+            BurgerValidate.bindEmail(document.getElementById('email'), document.getElementById('wrap-email'), document.getElementById('msg-email'), v => { states.email = v; update(); });
+            BurgerValidate.bindSenha(document.getElementById('senha'), document.getElementById('wrap-senha'), document.getElementById('msg-senha'), document.getElementById('senha-hints'), null, v => { states.senha = v; update(); });
+            BurgerValidate.bindEye(document.getElementById('toggleSenha'), document.getElementById('senha'), document.getElementById('eyeIcon'));
 
-  <footer class="burger-footer">
-    <a href="cadastro-cliente.html" class="footer-link">Não possui conta? <strong>Cadastre-se</strong></a>
-    <a href="esqueci-senha.html" class="footer-link">Esqueci minha senha</a>
-    <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
-  </footer>
-
-  <!-- Modal sucesso -->
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal-box">
-      <div class="modal-icon success"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e"
-          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12" />
-        </svg></div>
-      <h2 class="modal-title">Login realizado<br>com sucesso!</h2>
-      <p class="modal-sub">Bem-vindo ao painel administrativo.<br>Redirecionando…</p>
-      <button type="button" class="modal-btn" id="modalOk">Continuar</button>
-    </div>
-  </div>
-
-  <script src="burger-validate.js"></script>
-  <script src="accessibility.js"></script>
-  <script>
-    (() => {
-      const states = { email: false, senha: false };
-      const btn = document.getElementById('btnSubmit');
-      const update = BurgerValidate.bindBtn(btn, states);
-
-      BurgerValidate.bindEmail(
-        document.getElementById('email'),
-        document.getElementById('wrap-email'),
-        document.getElementById('msg-email'),
-        v => { states.email = v; update(); }
-      );
-      BurgerValidate.bindSenha(
-        document.getElementById('senha'),
-        document.getElementById('wrap-senha'),
-        document.getElementById('msg-senha'),
-        document.getElementById('senha-hints'),
-        null,
-        v => { states.senha = v; update(); }
-      );
-      BurgerValidate.bindEye(
-        document.getElementById('toggleSenha'),
-        document.getElementById('senha'),
-        document.getElementById('eyeIcon')
-      );
-
-      btn.addEventListener('click', () => {
-        if (!states.email || !states.senha) return;
-        BurgerValidate.openModal(document.getElementById('modalBackdrop'));
-      });
-      BurgerValidate.bindModal(document.getElementById('modalBackdrop'), document.getElementById('modalOk'), 'admin-dashboard.html');
-    })();
-  </script>
+            btn.addEventListener('click', () => {
+                if (!states.email || !states.senha) return;
+                BurgerValidate.openModal(document.getElementById('modalBackdrop'));
+            });
+            BurgerValidate.bindModal(document.getElementById('modalBackdrop'), document.getElementById('modalOk'), 'admin-dashboard.html');
+        })();
+    </script>
 </body>
 
 </html>

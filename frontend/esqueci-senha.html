@@ -7,114 +7,57 @@
     <title>Menu VR — Recuperar Senha</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="burger.css">
-    <style>
-        /* ── 1 campo: email ── */
-        .overlay-email {
-            top: 44%;
-        }
-
-        .overlay-btn {
-            top: 63%;
-        }
-
-        @media (max-width:480px) {
-            .overlay-email {
-                top: 43%;
-            }
-
-            .overlay-btn {
-                top: 62%;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login-split.css">
 </head>
 
 <body>
-    <svg class="light-rays" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.5" fill="none">
-            <line x1="450" y1="450" x2="0" y2="0" />
-            <line x1="450" y1="450" x2="150" y2="0" />
-            <line x1="450" y1="450" x2="300" y2="0" />
-            <line x1="450" y1="450" x2="450" y2="0" />
-            <line x1="450" y1="450" x2="600" y2="0" />
-            <line x1="450" y1="450" x2="750" y2="0" />
-            <line x1="450" y1="450" x2="900" y2="0" />
-            <line x1="450" y1="450" x2="900" y2="150" />
-            <line x1="450" y1="450" x2="900" y2="300" />
-            <line x1="450" y1="450" x2="900" y2="450" />
-            <line x1="450" y1="450" x2="900" y2="600" />
-            <line x1="450" y1="450" x2="900" y2="750" />
-            <line x1="450" y1="450" x2="900" y2="900" />
-            <line x1="450" y1="450" x2="750" y2="900" />
-            <line x1="450" y1="450" x2="600" y2="900" />
-            <line x1="450" y1="450" x2="450" y2="900" />
-            <line x1="450" y1="450" x2="300" y2="900" />
-            <line x1="450" y1="450" x2="150" y2="900" />
-            <line x1="450" y1="450" x2="0" y2="900" />
-            <line x1="450" y1="450" x2="0" y2="750" />
-            <line x1="450" y1="450" x2="0" y2="600" />
-            <line x1="450" y1="450" x2="0" y2="450" />
-            <line x1="450" y1="450" x2="0" y2="300" />
-            <line x1="450" y1="450" x2="0" y2="150" />
-        </g>
-    </svg>
+    <div class="bg-decoration bg-circle-1"></div>
+    <div class="bg-decoration bg-circle-2"></div>
 
-    <div class="logo-wrap"><img src="assets/Logo.svg" alt="Logo Menu VR"></div>
-
-    <div class="burger-stack">
-        <div class="burger-layer layer-pao-topo"><img src="assets/pao_de_cima 1 (1).svg" alt="Pão do topo"></div>
-        <div class="burger-layer layer-carne1"><img src="assets/Carne-queijo.svg" alt=""></div>
-        <div class="burger-layer layer-tomate"><img src="assets/Tomate.svg" alt=""></div>
-        <div class="burger-layer layer-carne2"><img src="assets/Carne-queijo.svg" alt=""></div>
-        <div class="burger-layer layer-alface"><img src="assets/Alface.svg" alt=""></div>
-        <div class="burger-layer layer-pao-baixo"><img src="assets/Pao_baixo.svg" alt="Pão de baixo"></div>
-
-        <!-- E-mail -->
-        <div class="form-overlay overlay-email">
-            <div class="input-wrap" id="wrap-email">
-                <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                        <polyline points="22,6 12,13 2,6" />
-                    </svg></span>
-                <input type="email" id="email" class="glass-field" placeholder="Seu e-mail cadastrado"
-                    autocomplete="email">
+    <div class="split-container">
+        <div class="split-left">
+            <div class="burger-playground" id="burgerPlayground">
+                <div class="drag-layer layer-pao-topo" data-layer="pao-topo"><img src="assets/pao_de_cima 1 (1).svg" alt="Pão do topo"></div>
+                <div class="drag-layer layer-carne1" data-layer="carne1"><img src="assets/Carne-queijo.svg" alt="Carne"></div>
+                <div class="drag-layer layer-tomate" data-layer="tomate"><img src="assets/Tomate.svg" alt="Tomate"></div>
+                <div class="drag-layer layer-carne2" data-layer="carne2"><img src="assets/Carne-queijo.svg" alt="Carne"></div>
+                <div class="drag-layer layer-alface" data-layer="alface"><img src="assets/Alface.svg" alt="Alface"></div>
+                <div class="drag-layer layer-pao-baixo" data-layer="pao-baixo"><img src="assets/Pao_baixo.svg" alt="Pão de baixo"></div>
             </div>
-            <span class="field-msg" id="msg-email"></span>
+            <button type="button" class="btn-remontar" id="btnRemontar">🍔 Remontar</button>
+            <p class="playground-hint">Arraste as camadas do hambúrguer!</p>
         </div>
 
-        <!-- Botão -->
-        <div class="form-overlay overlay-btn">
-            <button type="button" class="btn-entrar" id="btnSubmit" disabled>Enviar Código</button>
+        <div class="split-right">
+            <div class="form-card">
+                <div class="logo-area"><img src="assets/Logo.svg" alt="Logo Menu VR"></div>
+                <h1 class="form-title">Recuperar senha</h1>
+                <p class="form-subtitle">Informe seu e-mail cadastrado para receber o código de verificação</p>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-wrap" id="wrap-email">
+                        <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                        <input type="email" id="email" class="form-input" placeholder="Seu e-mail cadastrado" autocomplete="email">
+                    </div>
+                    <span class="field-msg" id="msg-email"></span>
+                </div>
+
+                <button type="button" class="btn-entrar" id="btnSubmit" disabled>Enviar Código</button>
+
+                <div class="form-footer">
+                    <a href="login.html">Lembrou a senha? <strong>Entrar</strong></a>
+                    <a href="login.html">← Voltar</a>
+                    <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer class="burger-footer">
-        <a href="index.html" class="footer-link">Lembrou a senha? <strong>Entrar</strong></a>
-        <a href="index.html" class="footer-link back">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <line x1="19" y1="12" x2="5" y2="12" />
-                <polyline points="12 19 5 12 12 5" />
-            </svg>
-            Voltar
-        </a>
-        <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
-    </footer>
-
-    <!-- Modal: código enviado -->
-    <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
         <div class="modal-box">
-            <div class="modal-icon info">
-                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1565D8" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                    <polyline points="22,6 12,13 2,6" />
-                </svg>
-            </div>
+            <div class="modal-check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1565D8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
             <h2 class="modal-title">Código enviado!</h2>
             <p class="modal-sub">Verifique sua caixa de entrada e insira o código de confirmação na próxima tela.</p>
             <button type="button" class="modal-btn" id="modalOk">Inserir Código</button>
@@ -122,6 +65,7 @@
     </div>
 
     <script src="burger-validate.js"></script>
+    <script src="login-split.js"></script>
     <script>
         (() => {
             const states = { email: false };
