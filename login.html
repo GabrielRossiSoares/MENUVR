@@ -5,680 +5,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu VR — Login</title>
+    <meta name="description" content="Faça login no Menu VR — cardápio digital interativo para restaurantes.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --blue-vibrant: #1565D8;
-            --blue-glow: rgba(21, 101, 216, 0.6);
-            --input-bg: rgba(8, 18, 34, 0.75);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --text-white: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.6);
-            --font: 'Inter', system-ui, sans-serif;
-            --transition: all 0.25s ease;
-            --color-focus: #1565D8;
-            --color-valid: #22c55e;
-            --color-invalid: #ef4444;
-        }
-
-        html,
-        body {
-            height: 100%;
-            overflow-x: hidden;
-        }
-
-        body {
-            background: radial-gradient(circle at center, #163460 0%, #0d1f3c 45%, #070f1e 100%);
-            font-family: var(--font);
-            color: var(--text-white);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem 1rem;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 1000px;
-            height: 1000px;
-            background: radial-gradient(circle, rgba(21, 101, 216, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .light-rays {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120vw;
-            height: 120vw;
-            opacity: 0.08;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ── Burger Stack ── */
-        .burger-stack {
-            position: relative;
-            z-index: 1;
-            width: min(420px, 95vw);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .burger-layer {
-            position: relative;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            pointer-events: none;
-        }
-
-        .burger-layer img {
-            width: 100%;
-            max-width: 480px;
-            height: auto;
-            display: block;
-        }
-
-        .layer-pao-topo {
-            z-index: 9;
-            margin-bottom: -155px;
-        }
-
-        .layer-pao-topo img {
-            transform: scale(1.15);
-            filter: drop-shadow(0 0 25px var(--blue-glow));
-        }
-
-        .layer-carne1 {
-            z-index: 8;
-            margin-bottom: -240px;
-        }
-
-        .layer-tomate {
-            z-index: 7;
-            margin-bottom: -195px;
-        }
-
-        .layer-carne2 {
-            z-index: 6;
-            margin-bottom: -245px;
-        }
-
-        .layer-alface {
-            z-index: 5;
-            margin-bottom: -215px;
-        }
-
-        .layer-pao-baixo {
-            z-index: 4;
-        }
-
-        /* ── Form Overlays ── */
-        .form-overlay {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 68%;
-            max-width: 270px;
-            z-index: 100;
-            pointer-events: auto;
-        }
-
-        .overlay-email {
-            top: 39%;
-        }
-
-        .overlay-senha {
-            top: 54%;
-        }
-
-        .overlay-btn {
-            top: 72%;
-        }
-
-        /* ── Input Wrap ── */
-        .input-wrap {
-            position: relative;
-            width: 100%;
-        }
-
-        .field-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.45);
-            pointer-events: none;
-            display: flex;
-            align-items: center;
-            transition: color 0.25s ease;
-        }
-
-        .glass-field {
-            width: 100%;
-            background: var(--input-bg);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1.5px solid var(--glass-border);
-            border-radius: 999px;
-            padding: 11px 18px 11px 42px;
-            color: var(--text-white);
-            font-family: var(--font);
-            font-size: 0.92rem;
-            outline: none;
-            transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-        }
-
-        .glass-field::placeholder {
-            color: var(--text-muted);
-        }
-
-        .input-wrap.is-focus .glass-field {
-            border-color: var(--color-focus);
-            box-shadow: 0 0 0 3px rgba(21, 101, 216, 0.25);
-            background: rgba(8, 18, 34, 0.88);
-        }
-
-        .input-wrap.is-valid .glass-field {
-            border-color: var(--color-valid);
-            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
-        }
-
-        .input-wrap.is-invalid .glass-field {
-            border-color: var(--color-invalid);
-            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
-        }
-
-        .input-wrap.is-focus .field-icon {
-            color: var(--color-focus);
-        }
-
-        .input-wrap.is-valid .field-icon {
-            color: var(--color-valid);
-        }
-
-        .input-wrap.is-invalid .field-icon {
-            color: var(--color-invalid);
-        }
-
-        /* ── Mensagem inline ── */
-        .field-msg {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 600;
-            margin-top: 5px;
-            padding-left: 14px;
-            min-height: 14px;
-            color: var(--color-invalid);
-            opacity: 0;
-            transform: translateY(-4px);
-            transition: opacity 0.2s ease, transform 0.2s ease;
-            pointer-events: none;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
-            white-space: nowrap;
-        }
-
-        .field-msg.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .field-msg.success {
-            color: var(--color-valid);
-        }
-
-        /* ── Eye Button ── */
-        .eye-btn {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            transition: color 0.2s ease;
-        }
-
-        .eye-btn:hover {
-            color: var(--text-white);
-        }
-
-        /* ══════════════════════════════════════════
-           HINTS — fora do .form-overlay, fixados
-           abaixo da camada de senha com position:absolute
-           no .burger-stack diretamente
-        ══════════════════════════════════════════ */
-        .password-hints-wrap {
-            position: absolute;
-            /* alinhado abaixo do input de senha:
-               overlay-senha está em top:54%, input tem ~40px de altura,
-               e queremos um gap de ~12px → 54% + ~50px ≈ ajuste em px */
-            top: calc(54% + 52px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: 68%;
-            max-width: 270px;
-            z-index: 101;
-            pointer-events: none;
-        }
-
-        .password-hints {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding: 8px 12px;
-            background: rgba(5, 12, 28, 0.82);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            opacity: 0;
-            transform: translateY(-6px);
-            transition: opacity 0.22s ease, transform 0.22s ease;
-        }
-
-        .password-hints.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .hint {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.45);
-            transition: color 0.2s ease;
-        }
-
-        .hint.ok {
-            color: var(--color-valid);
-        }
-
-        .hint.fail {
-            color: var(--color-invalid);
-        }
-
-        .hint-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: currentColor;
-            flex-shrink: 0;
-            transition: background 0.2s ease;
-        }
-
-        /* ── Botão Entrar ── */
-        .btn-entrar {
-            width: 100%;
-            padding: 12px 24px;
-            background: linear-gradient(180deg, #2680FF 0%, #1052C9 100%);
-            color: #fff;
-            font-weight: 800;
-            font-size: 0.95rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            border: none;
-            border-radius: 10px;
-            cursor: not-allowed;
-            transition: var(--transition);
-            box-shadow: 0 8px 24px rgba(21, 101, 216, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            opacity: 0.45;
-            filter: grayscale(0.3);
-        }
-
-        .btn-entrar.enabled {
-            cursor: pointer;
-            opacity: 1;
-            filter: none;
-        }
-
-        .btn-entrar.enabled:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(21, 101, 216, 0.75);
-        }
-
-        .btn-entrar.enabled:active {
-            transform: scale(0.98);
-        }
-
-        /* ══════════════════════════════════════════
-           MODAL DE SUCESSO
-        ══════════════════════════════════════════ */
-        .modal-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-backdrop.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .modal-box {
-            background: linear-gradient(145deg, #0d1f3c, #071428);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            max-width: 320px;
-            width: 90%;
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(21, 101, 216, 0.2);
-            transform: scale(0.85) translateY(20px);
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .modal-backdrop.show .modal-box {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
-
-        /* Ícone de check animado */
-        .modal-check {
-            width: 68px;
-            height: 68px;
-            border-radius: 50%;
-            background: rgba(34, 197, 94, 0.12);
-            border: 2px solid var(--color-valid);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.2rem;
-            box-shadow: 0 0 24px rgba(34, 197, 94, 0.3);
-        }
-
-        .modal-check svg {
-            stroke-dasharray: 40;
-            stroke-dashoffset: 40;
-            transition: stroke-dashoffset 0.5s ease 0.2s;
-        }
-
-        .modal-backdrop.show .modal-check svg {
-            stroke-dashoffset: 0;
-        }
-
-        .modal-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--text-white);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.01em;
-        }
-
-        .modal-sub {
-            font-size: 0.88rem;
-            color: var(--text-muted);
-            margin-bottom: 1.8rem;
-            line-height: 1.5;
-        }
-
-        .modal-btn {
-            width: 100%;
-            padding: 11px 20px;
-            background: linear-gradient(180deg, #2680FF 0%, #1052C9 100%);
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 6px 18px rgba(21, 101, 216, 0.45);
-        }
-
-        .modal-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(21, 101, 216, 0.65);
-        }
-
-        /* ── Footer ── */
-        .burger-footer {
-            position: relative;
-            z-index: 10;
-            margin-top: 28px;
-            text-align: center;
-        }
-
-        .link-forgot {
-            display: block;
-            margin-bottom: 6px;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.88rem;
-            transition: var(--transition);
-        }
-
-        .link-forgot:hover {
-            color: var(--text-white);
-        }
-
-        .slogan {
-            font-size: 0.78rem;
-            color: rgba(255, 255, 255, 0.35);
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 480px) {
-            .layer-pao-topo {
-                margin-bottom: -120px;
-            }
-
-            .layer-carne1 {
-                margin-bottom: -190px;
-            }
-
-            .layer-tomate {
-                margin-bottom: -155px;
-            }
-
-            .layer-carne2 {
-                margin-bottom: -195px;
-            }
-
-            .layer-alface {
-                margin-bottom: -170px;
-            }
-
-            .overlay-email {
-                top: 38%;
-            }
-
-            .overlay-senha {
-                top: 53%;
-            }
-
-            .overlay-btn {
-                top: 71%;
-            }
-
-            .password-hints-wrap {
-                top: calc(53% + 52px);
-            }
-
-            .form-overlay {
-                width: 72%;
-            }
-        }
-
-        /* ── Logo ── */
-        .logo-wrap {
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-        }
-
-        .logo-wrap img {
-            height: 120px;
-            width: auto;
-            filter: drop-shadow(0 0 15px rgba(21, 101, 216, 0.4));
-        }
-    </style>
+    <link rel="stylesheet" href="login-split.css">
 </head>
 
 <body>
 
-    <svg class="light-rays" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="0.5" fill="none">
-            <line x1="450" y1="450" x2="0" y2="0" />
-            <line x1="450" y1="450" x2="150" y2="0" />
-            <line x1="450" y1="450" x2="300" y2="0" />
-            <line x1="450" y1="450" x2="450" y2="0" />
-            <line x1="450" y1="450" x2="600" y2="0" />
-            <line x1="450" y1="450" x2="750" y2="0" />
-            <line x1="450" y1="450" x2="900" y2="0" />
-            <line x1="450" y1="450" x2="900" y2="150" />
-            <line x1="450" y1="450" x2="900" y2="300" />
-            <line x1="450" y1="450" x2="900" y2="450" />
-            <line x1="450" y1="450" x2="900" y2="600" />
-            <line x1="450" y1="450" x2="900" y2="750" />
-            <line x1="450" y1="450" x2="900" y2="900" />
-            <line x1="450" y1="450" x2="750" y2="900" />
-            <line x1="450" y1="450" x2="600" y2="900" />
-            <line x1="450" y1="450" x2="450" y2="900" />
-            <line x1="450" y1="450" x2="300" y2="900" />
-            <line x1="450" y1="450" x2="150" y2="900" />
-            <line x1="450" y1="450" x2="0" y2="900" />
-            <line x1="450" y1="450" x2="0" y2="750" />
-            <line x1="450" y1="450" x2="0" y2="600" />
-            <line x1="450" y1="450" x2="0" y2="450" />
-            <line x1="450" y1="450" x2="0" y2="300" />
-            <line x1="450" y1="450" x2="0" y2="150" />
-        </g>
-    </svg>
+    <!-- Decorações de fundo -->
+    <div class="bg-decoration bg-circle-1"></div>
+    <div class="bg-decoration bg-circle-2"></div>
 
-    <div class="logo-wrap">
-        <img src="assets/Logo.svg" alt="Logo Menu VR">
+    <div class="split-container">
+
+        <!-- ═══ ESQUERDA: Burger Interativo ═══ -->
+        <div class="split-left">
+            <div class="burger-playground" id="burgerPlayground">
+                <div class="drag-layer layer-pao-topo" data-layer="pao-topo">
+                    <img src="assets/pao_de_cima 1 (1).svg" alt="Pão do topo">
+                </div>
+                <div class="drag-layer layer-carne1" data-layer="carne1">
+                    <img src="assets/Carne-queijo.svg" alt="Carne superior">
+                </div>
+                <div class="drag-layer layer-tomate" data-layer="tomate">
+                    <img src="assets/Tomate.svg" alt="Tomate">
+                </div>
+                <div class="drag-layer layer-carne2" data-layer="carne2">
+                    <img src="assets/Carne-queijo.svg" alt="Carne inferior">
+                </div>
+                <div class="drag-layer layer-alface" data-layer="alface">
+                    <img src="assets/Alface.svg" alt="Alface">
+                </div>
+                <div class="drag-layer layer-pao-baixo" data-layer="pao-baixo">
+                    <img src="assets/Pao_baixo.svg" alt="Pão de baixo">
+                </div>
+            </div>
+
+            <button type="button" class="btn-remontar" id="btnRemontar">🍔 Remontar</button>
+            <p class="playground-hint">Arraste as camadas do hambúrguer!</p>
+        </div>
+
+        <!-- ═══ DIREITA: Form Card ═══ -->
+        <div class="split-right">
+            <div class="form-card">
+                <div class="logo-area">
+                    <img src="assets/Logo.svg" alt="Logo Menu VR">
+                </div>
+
+                <h1 class="form-title">Bem-vindo de volta</h1>
+                <p class="form-subtitle">Entre na sua conta para continuar</p>
+
+                <!-- Campo E-mail -->
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-wrap" id="wrap-email">
+                        <span class="field-icon">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </span>
+                        <input type="email" id="email" class="form-input" placeholder="seu@email.com"
+                            autocomplete="email">
+                    </div>
+                    <span class="field-msg" id="msg-email"></span>
+                </div>
+
+                <!-- Campo Senha -->
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <div class="input-wrap" id="wrap-senha">
+                        <span class="field-icon">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                            </svg>
+                        </span>
+                        <input type="password" id="senha" class="form-input" placeholder="Sua senha"
+                            autocomplete="current-password">
+                        <button type="button" class="eye-btn" id="toggleSenha" aria-label="Mostrar/ocultar senha">
+                            <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="field-msg" id="msg-senha"></span>
+
+                    <!-- Hints da senha -->
+                    <div class="password-hints" id="senha-hints">
+                        <div class="hint" id="hint-len"><span class="hint-dot"></span> Mínimo 8 caracteres</div>
+                        <div class="hint" id="hint-upper"><span class="hint-dot"></span> 1 letra maiúscula</div>
+                        <div class="hint" id="hint-lower"><span class="hint-dot"></span> 1 letra minúscula</div>
+                        <div class="hint" id="hint-num"><span class="hint-dot"></span> 1 número</div>
+                        <div class="hint" id="hint-spec"><span class="hint-dot"></span> 1 caractere especial</div>
+                    </div>
+                </div>
+
+                <!-- Botão Entrar -->
+                <button type="button" class="btn-entrar" id="btnSubmit" disabled>Entrar</button>
+
+                <!-- Footer -->
+                <div class="form-footer">
+                    <a href="esqueci-senha.html">Esqueci minha senha</a>
+                    <div>
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Novo por aqui? </span>
+                        <a href="cadastro-cliente.html" class="link-register">Cadastre-se</a>
+                    </div>
+                    <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
+                </div>
+            </div>
+        </div>
+
     </div>
-
-    <div class="burger-stack">
-
-        <!-- Camadas visuais -->
-        <div class="burger-layer layer-pao-topo">
-            <img src="assets/pao_de_cima 1 (1).svg" alt="Pão do topo">
-        </div>
-        <div class="burger-layer layer-carne1">
-            <img src="assets/Carne-queijo.svg" alt="Carne superior">
-        </div>
-        <div class="burger-layer layer-tomate">
-            <img src="assets/Tomate.svg" alt="Tomate">
-        </div>
-        <div class="burger-layer layer-carne2">
-            <img src="assets/Carne-queijo.svg" alt="Carne inferior">
-        </div>
-        <div class="burger-layer layer-alface">
-            <img src="assets/Alface.svg" alt="Alface">
-        </div>
-        <div class="burger-layer layer-pao-baixo">
-            <img src="assets/Pao_baixo.svg" alt="Pão de baixo">
-        </div>
-
-        <!-- Campo E-mail -->
-        <div class="form-overlay overlay-email">
-            <div class="input-wrap" id="wrap-email">
-                <span class="field-icon">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                    </svg>
-                </span>
-                <input type="email" id="email" class="glass-field" placeholder="Seu E-mail" autocomplete="email">
-            </div>
-            <span class="field-msg" id="msg-email"></span>
-        </div>
-
-        <!-- Campo Senha -->
-        <div class="form-overlay overlay-senha">
-            <div class="input-wrap" id="wrap-senha">
-                <span class="field-icon">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                    </svg>
-                </span>
-                <input type="password" id="senha" class="glass-field" placeholder="Sua Senha"
-                    autocomplete="current-password">
-                <button type="button" class="eye-btn" id="toggleSenha" aria-label="Mostrar/ocultar senha">
-                    <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                        <circle cx="12" cy="12" r="3" />
-                    </svg>
-                </button>
-            </div>
-            <span class="field-msg" id="msg-senha"></span>
-        </div>
-
-        <!-- Hints da senha — FORA do overlay, ancorado no burger-stack -->
-        <div class="password-hints-wrap">
-            <div class="password-hints" id="senha-hints">
-                <div class="hint" id="hint-len"> <span class="hint-dot"></span> Mínimo 8 caracteres</div>
-                <div class="hint" id="hint-upper"><span class="hint-dot"></span> 1 letra maiúscula</div>
-                <div class="hint" id="hint-lower"><span class="hint-dot"></span> 1 letra minúscula</div>
-                <div class="hint" id="hint-num"> <span class="hint-dot"></span> 1 número</div>
-                <div class="hint" id="hint-spec"> <span class="hint-dot"></span> 1 caractere especial</div>
-            </div>
-        </div>
-
-        <!-- Botão Entrar -->
-        <div class="form-overlay overlay-btn">
-            <button type="button" class="btn-entrar" id="btnSubmit" disabled>Entrar</button>
-        </div>
-
-    </div>
-
-    <footer class="burger-footer">
-        <a href="esqueci-senha.html" class="link-forgot">Esqueci minha senha</a>
-        <div style="margin: 15px 0;">
-            <span style="color: var(--text-muted); font-size: 0.88rem;">Novo por aqui? </span>
-            <a href="cadastro-cliente.html" style="color: var(--blue-vibrant); text-decoration: none; font-weight: 700; font-size: 0.95rem; border-bottom: 1px solid var(--blue-vibrant); padding-bottom: 2px;">Cadastre-se</a>
-        </div>
-        <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
-    </footer>
 
     <!-- ══ MODAL DE SUCESSO ══ -->
     <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -695,158 +140,24 @@
         </div>
     </div>
 
+    <!-- ══ SCRIPTS ══ -->
+    <script src="burger-validate.js"></script>
+    <script src="login-split.js"></script>
     <script>
         (() => {
-            /* ── Refs ── */
-            const emailInput = document.getElementById('email');
-            const senhaInput = document.getElementById('senha');
-            const wrapEmail = document.getElementById('wrap-email');
-            const wrapSenha = document.getElementById('wrap-senha');
-            const msgEmail = document.getElementById('msg-email');
-            const msgSenha = document.getElementById('msg-senha');
-            const senhaHints = document.getElementById('senha-hints');
-            const btnSubmit = document.getElementById('btnSubmit');
-            const toggleSenha = document.getElementById('toggleSenha');
-            const eyeIcon = document.getElementById('eyeIcon');
-            const modalBackdrop = document.getElementById('modalBackdrop');
-            const modalOk = document.getElementById('modalOk');
+            const states = { email: false, senha: false };
+            const btn = document.getElementById('btnSubmit');
+            const update = BurgerValidate.bindBtn(btn, states);
 
-            const ICON_OPEN = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
-            const ICON_CLOSED = `<line x1="1" y1="1" x2="23" y2="23"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><path d="M1 12s4-8 11-8"/>`;
+            BurgerValidate.bindEmail(document.getElementById('email'), document.getElementById('wrap-email'), document.getElementById('msg-email'), v => { states.email = v; update(); });
+            BurgerValidate.bindSenha(document.getElementById('senha'), document.getElementById('wrap-senha'), document.getElementById('msg-senha'), document.getElementById('senha-hints'), null, v => { states.senha = v; update(); });
+            BurgerValidate.bindEye(document.getElementById('toggleSenha'), document.getElementById('senha'), document.getElementById('eyeIcon'));
 
-            let emailOk = false;
-            let senhaOk = false;
-
-            /* ── Utilitários ── */
-            function setWrap(wrap, state) {
-                wrap.classList.remove('is-focus', 'is-valid', 'is-invalid');
-                if (state) wrap.classList.add(state);
-            }
-            function showMsg(el, text, success = false) {
-                el.textContent = text;
-                el.classList.toggle('success', success);
-                el.classList.toggle('visible', !!text);
-            }
-
-            /* ── E-mail ── */
-            const RE_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-            function validateEmail(interactive) {
-                const val = emailInput.value.trim();
-                if (val === '') {
-                    setWrap(wrapEmail, interactive ? 'is-focus' : null);
-                    showMsg(msgEmail, '');
-                    emailOk = false;
-                } else if (RE_EMAIL.test(val)) {
-                    setWrap(wrapEmail, 'is-valid');
-                    showMsg(msgEmail, '✓ E-mail válido', true);
-                    emailOk = true;
-                } else {
-                    setWrap(wrapEmail, 'is-invalid');
-                    showMsg(msgEmail, '✗ E-mail inválido');
-                    emailOk = false;
-                }
-                updateBtn();
-            }
-
-            emailInput.addEventListener('focus', () => { if (!emailOk) setWrap(wrapEmail, 'is-focus'); });
-            emailInput.addEventListener('input', () => validateEmail(true));
-            emailInput.addEventListener('blur', () => {
-                if (!emailInput.value.trim()) { setWrap(wrapEmail, null); showMsg(msgEmail, ''); }
-                else validateEmail(false);
+            btn.addEventListener('click', () => {
+                if (!states.email || !states.senha) return;
+                BurgerValidate.openModal(document.getElementById('modalBackdrop'));
             });
-
-            /* ── Senha ── */
-            const RULES = {
-                len: v => v.length >= 8,
-                upper: v => /[A-Z]/.test(v),
-                lower: v => /[a-z]/.test(v),
-                num: v => /[0-9]/.test(v),
-                spec: v => /[^A-Za-z0-9]/.test(v),
-            };
-
-            function validateSenha(interactive) {
-                const val = senhaInput.value;
-                if (val === '') {
-                    setWrap(wrapSenha, interactive ? 'is-focus' : null);
-                    showMsg(msgSenha, '');
-                    senhaHints.classList.remove('visible');
-                    senhaOk = false;
-                    updateBtn();
-                    return;
-                }
-
-                senhaHints.classList.add('visible');
-                let allOk = true;
-                for (const [key, test] of Object.entries(RULES)) {
-                    const ok = test(val);
-                    const el = document.getElementById('hint-' + key);
-                    el.classList.toggle('ok', ok);
-                    el.classList.toggle('fail', !ok);
-                    if (!ok) allOk = false;
-                }
-
-                if (allOk) {
-                    setWrap(wrapSenha, 'is-valid');
-                    showMsg(msgSenha, '✓ Senha forte', true);
-                    senhaHints.classList.remove('visible');
-                    senhaOk = true;
-                } else {
-                    setWrap(wrapSenha, interactive ? 'is-focus' : 'is-invalid');
-                    showMsg(msgSenha, '');
-                    senhaOk = false;
-                }
-                updateBtn();
-            }
-
-            senhaInput.addEventListener('focus', () => {
-                if (!senhaOk) {
-                    setWrap(wrapSenha, 'is-focus');
-                    if (senhaInput.value.length > 0) senhaHints.classList.add('visible');
-                }
-            });
-            senhaInput.addEventListener('input', () => validateSenha(true));
-            senhaInput.addEventListener('blur', () => {
-                if (!senhaInput.value) { setWrap(wrapSenha, null); showMsg(msgSenha, ''); senhaHints.classList.remove('visible'); }
-                else validateSenha(false);
-            });
-
-            /* ── Eye toggle ── */
-            toggleSenha.addEventListener('click', () => {
-                const show = senhaInput.type === 'password';
-                senhaInput.type = show ? 'text' : 'password';
-                eyeIcon.innerHTML = show ? ICON_CLOSED : ICON_OPEN;
-            });
-
-            /* ── Botão ── */
-            function updateBtn() {
-                const ok = emailOk && senhaOk;
-                btnSubmit.disabled = !ok;
-                btnSubmit.classList.toggle('enabled', ok);
-            }
-
-            /* ── Submit → abre modal ── */
-            btnSubmit.addEventListener('click', () => {
-                if (!emailOk || !senhaOk) return;
-                modalBackdrop.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            });
-
-            /* ── Fechar modal ── */
-            function closeModal() {
-                modalBackdrop.classList.remove('show');
-                document.body.style.overflow = '';
-                // TODO: redirecionar — window.location.href = 'dashboard.html';
-            }
-
-            modalOk.addEventListener('click', closeModal);
-            modalBackdrop.addEventListener('click', e => {
-                if (e.target === modalBackdrop) closeModal();
-            });
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape' && modalBackdrop.classList.contains('show')) closeModal();
-            });
-
+            BurgerValidate.bindModal(document.getElementById('modalBackdrop'), document.getElementById('modalOk'), 'index.html');
         })();
     </script>
 </body>

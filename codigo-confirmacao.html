@@ -4,11 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu VR — Recuperar Senha</title>
+    <title>Menu VR — Código de Confirmação</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="login-split.css">
+    <style>
+        #codigo {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            padding-left: 18px;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,23 +41,21 @@
         <div class="split-right">
             <div class="form-card">
                 <div class="logo-area"><img src="assets/Logo.svg" alt="Logo Menu VR"></div>
-                <h1 class="form-title">Recuperar senha</h1>
-                <p class="form-subtitle">Informe seu e-mail cadastrado para receber o código de verificação</p>
+                <h1 class="form-title">Código de verificação</h1>
+                <p class="form-subtitle">Insira o código de 6 dígitos enviado para seu e-mail</p>
 
                 <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <div class="input-wrap" id="wrap-email">
-                        <span class="field-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-                        <input type="email" id="email" class="form-input" placeholder="Seu e-mail cadastrado" autocomplete="email">
+                    <label for="codigo">Código</label>
+                    <div class="input-wrap" id="wrap-codigo">
+                        <input type="text" id="codigo" class="form-input" placeholder="000000" inputmode="numeric" autocomplete="one-time-code">
                     </div>
-                    <span class="field-msg" id="msg-email"></span>
+                    <span class="field-msg" id="msg-codigo"></span>
                 </div>
 
-                <button type="button" class="btn-entrar" id="btnSubmit" disabled>Enviar Código</button>
+                <button type="button" class="btn-entrar" id="btnSubmit" disabled>Confirmar</button>
 
                 <div class="form-footer">
-                    <a href="login.html">Lembrou a senha? <strong>Entrar</strong></a>
-                    <a href="login.html">← Voltar</a>
+                    <a href="esqueci-senha.html">← Voltar</a>
                     <p class="slogan">BG Tech Solutions - Do Manual ao Genial</p>
                 </div>
             </div>
@@ -57,10 +64,10 @@
 
     <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true">
         <div class="modal-box">
-            <div class="modal-check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1565D8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <h2 class="modal-title">Código enviado!</h2>
-            <p class="modal-sub">Verifique sua caixa de entrada e insira o código de confirmação na próxima tela.</p>
-            <button type="button" class="modal-btn" id="modalOk">Inserir Código</button>
+            <div class="modal-check"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h2 class="modal-title">Código confirmado!</h2>
+            <p class="modal-sub">Identidade verificada com sucesso.<br>Agora crie sua nova senha.</p>
+            <button type="button" class="modal-btn" id="modalOk">Criar Nova Senha</button>
         </div>
     </div>
 
@@ -68,17 +75,17 @@
     <script src="login-split.js"></script>
     <script>
         (() => {
-            const states = { email: false };
+            const states = { codigo: false };
             const btn = document.getElementById('btnSubmit');
             const update = BurgerValidate.bindBtn(btn, states);
 
-            BurgerValidate.bindEmail(document.getElementById('email'), document.getElementById('wrap-email'), document.getElementById('msg-email'), v => { states.email = v; update(); });
+            BurgerValidate.bindCodigo(document.getElementById('codigo'), document.getElementById('wrap-codigo'), document.getElementById('msg-codigo'), 6, v => { states.codigo = v; update(); });
 
             btn.addEventListener('click', () => {
-                if (!states.email) return;
+                if (!states.codigo) return;
                 BurgerValidate.openModal(document.getElementById('modalBackdrop'));
             });
-            BurgerValidate.bindModal(document.getElementById('modalBackdrop'), document.getElementById('modalOk'), 'codigo-confirmacao.html');
+            BurgerValidate.bindModal(document.getElementById('modalBackdrop'), document.getElementById('modalOk'), 'nova-senha.html');
         })();
     </script>
 </body>

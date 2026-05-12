@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu VR — Configurações Admin</title>
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .config-section {
+            background: var(--admin-card);
+            border: 1px solid var(--admin-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .config-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--admin-border);
+        }
+
+        .config-header svg {
+            width: 24px;
+            height: 24px;
+            color: var(--blue-vibrant);
+        }
+
+        .config-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .toggle-group:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .toggle-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Toggle Button */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--admin-border);
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #fff;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--blue-vibrant);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Users Table specific to Config */
+        .badge-admin {
+            background: rgba(220, 38, 38, 0.15);
+            color: #ef4444;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-colab {
+            background: rgba(21, 101, 216, 0.15);
+            color: var(--blue-vibrant);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        body.light-mode .toggle-group {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+    </style>
+</head>
+
+<body>
+    <button class="mobile-menu-btn" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+    </button>
+    <div class="sidebar-overlay"></div>
+
+    <aside class="admin-sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/Logo.svg" alt="Logo Menu VR">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="admin-dashboard.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                </svg>
+                Dashboard
+            </a>
+            <a href="admin-produto.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                Produtos
+            </a>
+            <a href="admin-categoria.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <line x1="8" y1="6" x2="21" y2="6" />
+                    <line x1="8" y1="12" x2="21" y2="12" />
+                    <line x1="8" y1="18" x2="21" y2="18" />
+                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                </svg>
+                Categorias
+            </a>
+            <a href="admin-adicionais.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Adicionais
+            </a>
+            <a href="admin-pedidos.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg>
+                Pedidos
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="admin-config.html" class="nav-item active">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                    </path>
+                </svg>
+                Configurações
+            </a>
+            <a href="admin-login.html" class="nav-item logout">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Sair
+            </a>
+        </div>
+    </aside>
+
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1 class="header-title">Configurações do Sistema</h1>
+        </header>
+
+        <div class="admin-content">
+
+            <!-- App Theme -->
+            <section class="config-section">
+                <div class="config-header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <h2>Aparência do Painel</h2>
+                </div>
+                
+                <div class="toggle-group">
+                    <div class="toggle-info">
+                        <h4>Tema Claro (White Mode)</h4>
+                        <p>Alternar visual do painel administrativo entre escuro e claro</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggleThemeBtn">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Users Management -->
+            <section class="config-section">
+                <div class="config-header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <h2>Gerenciar Acessos (Admins e Colaboradores)</h2>
+                </div>
+
+                <div class="table-card" style="margin-bottom: 24px;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Papel</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersBody">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <form id="formNovoUser" class="form-row" style="align-items: flex-start;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="nome" style="margin-bottom: 4px;">Nome</label>
+                        <input type="text" id="nome" class="form-input" placeholder="Nome do usuário" autocomplete="off">
+                        <div class="form-error" id="errNome"></div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="email" style="margin-bottom: 4px;">E-mail</label>
+                        <input type="email" id="email" class="form-input" placeholder="exemplo@menuvr.com" autocomplete="off">
+                        <div class="form-error" id="errEmail"></div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label for="papel" style="margin-bottom: 4px;">Papel</label>
+                        <select id="papel" class="form-input">
+                            <option value="colaborador">Colaborador</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </div>
+                    <div style="padding-top: 24px;">
+                        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">Adicionar Usuário</button>
+                    </div>
+                </form>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Modal Delete User -->
+    <div class="admin-modal-backdrop" id="confirmModal">
+        <div class="admin-modal">
+            <div class="modal-icon-wrap danger">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6" />
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                </svg>
+            </div>
+            <h3>Excluir Usuário</h3>
+            <p>Tem certeza que deseja remover o acesso deste usuário?</p>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="btnCancelDelete">Cancelar</button>
+                <button class="btn-danger" id="btnConfirmDelete">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="accessibility.js"></script>
+    <script src="admin.js"></script>
+    <script>
+        (() => {
+            const toggleThemeBtn = document.getElementById('toggleThemeBtn');
+            const tbody = document.getElementById('usersBody');
+            const form = document.getElementById('formNovoUser');
+            const inputNome = document.getElementById('nome');
+            const inputEmail = document.getElementById('email');
+            const selectPapel = document.getElementById('papel');
+            const errNome = document.getElementById('errNome');
+            const errEmail = document.getElementById('errEmail');
+
+            // 1. Theme Toggle
+            toggleThemeBtn.checked = AdminStore.getTema() === 'light';
+            toggleThemeBtn.addEventListener('change', () => {
+                AdminStore.toggleTema();
+            });
+
+            // 2. Users Table
+            function renderUsers() {
+                const users = AdminStore.getUsuarios();
+                tbody.innerHTML = users.map(u => `
+                    <tr>
+                        <td style="font-weight: 600; color: var(--text-white);">${u.nome}</td>
+                        <td style="color: var(--text-secondary);">${u.email}</td>
+                        <td>
+                            <span class="${u.papel === 'admin' ? 'badge-admin' : 'badge-colab'}">
+                                ${u.papel === 'admin' ? 'Administrador' : 'Colaborador'}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn-icon delete" title="Remover acesso" data-delete-id="${u.id}" data-delete-name="${u.nome}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            // 3. User creation form
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                AdminUI.clearValidation(inputNome, errNome);
+                AdminUI.clearValidation(inputEmail, errEmail);
+
+                let valid = true;
+                if (!inputNome.value.trim()) {
+                    AdminUI.validateField(inputNome, errNome, [{ test: v => false, msg: 'Nome obrigatório' }]);
+                    valid = false;
+                }
+                const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail.value.trim());
+                if (!emailOk) {
+                    AdminUI.validateField(inputEmail, errEmail, [{ test: v => false, msg: 'E-mail inválido' }]);
+                    valid = false;
+                }
+
+                if (!valid) return;
+
+                const data = {
+                    nome: inputNome.value.trim(),
+                    email: inputEmail.value.trim().toLowerCase(),
+                    papel: selectPapel.value
+                };
+
+                const result = AdminStore.createUsuario(data);
+                if (result.error) {
+                    AdminUI.validateField(inputEmail, errEmail, [{ test: v => false, msg: result.error }]);
+                    return;
+                }
+
+                AdminUI.toast('Usuário adicionado com sucesso!');
+                form.reset();
+                inputNome.classList.remove('is-valid');
+                inputEmail.classList.remove('is-valid');
+                renderUsers();
+            });
+
+            // 4. Delete user
+            tbody.addEventListener('click', e => {
+                const btn = e.target.closest('.delete');
+                if (!btn) return;
+                const id = btn.dataset.deleteId;
+                const name = btn.dataset.deleteName;
+
+                AdminUI.confirmModal('Remover Acesso', `Tem certeza que deseja remover o acesso de ${name}?`, () => {
+                    const r = AdminStore.removeUsuario(id);
+                    if (r.error) {
+                        AdminUI.toast(r.error, 'error');
+                    } else {
+                        renderUsers();
+                        AdminUI.toast('Usuário removido.');
+                    }
+                });
+            });
+
+            AdminUI.initSidebar();
+            renderUsers();
+        })();
+    </script>
+</body>
+
+</html>

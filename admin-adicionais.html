@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu VR — Adicionais</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+    </button>
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/Logo.svg" alt="Logo Menu VR">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="admin-dashboard.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                </svg>
+                Dashboard
+            </a>
+            <a href="admin-produto.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                Produtos
+            </a>
+            <a href="admin-categoria.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <line x1="8" y1="6" x2="21" y2="6" />
+                    <line x1="8" y1="12" x2="21" y2="12" />
+                    <line x1="8" y1="18" x2="21" y2="18" />
+                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                </svg>
+                Categorias
+            </a>
+            <a href="admin-adicionais.html" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Adicionais
+            </a>
+            <a href="admin-pedidos.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg>
+                Pedidos
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="admin-config.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                    </path>
+                </svg>
+                Configurações
+            </a>
+            <a href="admin-login.html" class="nav-item logout">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Sair
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1 class="header-title">Adicionais</h1>
+            <div class="header-actions">
+                <button class="btn-primary" id="btnNova">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Novo Adicional
+                </button>
+            </div>
+        </header>
+
+        <div class="admin-content" style="max-width: 900px;">
+            <div class="table-card">
+                <table class="admin-table" id="adicionaisTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Preço (+ R$)</th>
+                            <th>Status</th>
+                            <th style="text-align: right;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adicionaisBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Edit/Create -->
+    <div class="admin-modal-backdrop" id="formModal">
+        <div class="admin-modal" style="text-align: left;">
+            <h3 id="modalTitle" style="margin-bottom: 24px;">Novo Adicional</h3>
+            <form id="adicionalForm" novalidate>
+                <div class="form-group">
+                    <label for="nome">Nome <span class="required">*</span></label>
+                    <input type="text" id="nome" class="form-input" placeholder="Ex: Bacon Extra" autocomplete="off">
+                    <div class="form-error" id="err-nome"></div>
+                </div>
+                <div class="form-group">
+                    <label for="preco">Preço (R$) <span class="required">*</span></label>
+                    <input type="text" id="preco" class="form-input" placeholder="0,00" inputmode="decimal" autocomplete="off">
+                    <div class="form-error" id="err-preco"></div>
+                </div>
+                <div class="form-group">
+                    <div class="toggle-wrap">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="ativo" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="toggle-label">Adicional ativo</span>
+                    </div>
+                </div>
+                <div class="modal-actions" style="margin-top: 32px;">
+                    <button type="button" class="btn-secondary" id="btnCancelForm">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="btnSaveForm">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div class="admin-modal-backdrop" id="confirmModal">
+        <div class="admin-modal">
+            <div class="modal-icon-wrap danger">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6" />
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                </svg>
+            </div>
+            <h3>Excluir adicional</h3>
+            <p id="confirmText">Tem certeza que deseja excluir?</p>
+            <div class="modal-actions">
+                <button class="btn-secondary" id="btnCancelDelete">Cancelar</button>
+                <button class="btn-danger" id="btnConfirmDelete">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        (() => {
+            const tbody = document.getElementById('adicionaisBody');
+            const btnNova = document.getElementById('btnNova');
+            const formModal = document.getElementById('formModal');
+            const form = document.getElementById('adicionalForm');
+            const btnCancelForm = document.getElementById('btnCancelForm');
+
+            const nomeInput = document.getElementById('nome');
+            const precoInput = document.getElementById('preco');
+            const ativoCheck = document.getElementById('ativo');
+            const modalTitle = document.getElementById('modalTitle');
+
+            let editingId = null;
+
+            function renderTable() {
+                const adicionais = AdminStore.getAdicionais();
+                if (!adicionais.length) {
+                    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; padding: 40px; color: var(--text-muted);">Nenhum adicional cadastrado.</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = adicionais.map(c => `
+                    <tr>
+                        <td><div class="product-name">${c.nome}</div></td>
+                        <td>${AdminUI.formatPrice(c.preco)}</td>
+                        <td>
+                            <button class="status-badge ${c.ativo ? 'active' : 'inactive'}" data-toggle-id="${c.id}">
+                                <span class="status-dot"></span>
+                                ${c.ativo ? 'Ativo' : 'Inativo'}
+                            </button>
+                        </td>
+                        <td style="text-align: right;">
+                            <div class="cell-actions" style="justify-content: flex-end;">
+                                <button class="btn-icon edit" title="Editar" data-edit-id="${c.id}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                </button>
+                                <button class="btn-icon delete" title="Excluir" data-delete-id="${c.id}" data-delete-name="${c.nome}">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            precoInput.addEventListener('input', () => {
+                let v = precoInput.value.replace(/[^\d,]/g, '');
+                precoInput.value = v;
+            });
+
+            function openForm(id = null) {
+                editingId = id;
+                AdminUI.clearValidation(nomeInput, document.getElementById('err-nome'));
+                AdminUI.clearValidation(precoInput, document.getElementById('err-preco'));
+                
+                if (id) {
+                    const c = AdminStore.getAdicionalById(id);
+                    if (!c) return;
+                    modalTitle.textContent = 'Editar Adicional';
+                    nomeInput.value = c.nome;
+                    precoInput.value = c.preco.toFixed(2).replace('.', ',');
+                    ativoCheck.checked = c.ativo;
+                } else {
+                    modalTitle.textContent = 'Novo Adicional';
+                    nomeInput.value = '';
+                    precoInput.value = '';
+                    ativoCheck.checked = true;
+                }
+                formModal.classList.add('show');
+                setTimeout(() => nomeInput.focus(), 100);
+            }
+
+            function closeForm() {
+                formModal.classList.remove('show');
+            }
+
+            btnNova.addEventListener('click', () => openForm());
+            btnCancelForm.addEventListener('click', closeForm);
+            formModal.addEventListener('click', e => { if (e.target === formModal) closeForm(); });
+
+            const RULES = {
+                nome: [{ test: v => v.length >= 2, msg: 'Nome deve ter pelo menos 2 caracteres' }],
+                preco: [
+                    { test: v => v !== '', msg: 'Informe o preço' },
+                    { test: v => { const n = parseFloat(v.replace(',', '.')); return !isNaN(n) && n >= 0; }, msg: 'Preço inválido' }
+                ]
+            };
+
+            nomeInput.addEventListener('blur', () => AdminUI.validateField(nomeInput, document.getElementById('err-nome'), RULES.nome));
+            precoInput.addEventListener('blur', () => AdminUI.validateField(precoInput, document.getElementById('err-preco'), RULES.preco));
+
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const v1 = AdminUI.validateField(nomeInput, document.getElementById('err-nome'), RULES.nome);
+                const v2 = AdminUI.validateField(precoInput, document.getElementById('err-preco'), RULES.preco);
+                
+                if (!v1 || !v2) return;
+
+                const data = {
+                    nome: nomeInput.value,
+                    preco: parseFloat(precoInput.value.replace(',', '.')),
+                    ativo: ativoCheck.checked
+                };
+
+                let result;
+                if (editingId) {
+                    result = AdminStore.updateAdicional(editingId, data);
+                } else {
+                    result = AdminStore.createAdicional(data);
+                }
+
+                if (result.error) {
+                    AdminUI.toast(result.error, 'error');
+                    return;
+                }
+
+                AdminUI.toast(editingId ? 'Adicional atualizado!' : 'Adicional criado!');
+                closeForm();
+                renderTable();
+            });
+
+            tbody.addEventListener('click', e => {
+                const btnToggle = e.target.closest('[data-toggle-id]');
+                if (btnToggle) {
+                    AdminStore.toggleAdicional(btnToggle.dataset.toggleId);
+                    renderTable();
+                    return;
+                }
+
+                const btnEdit = e.target.closest('[data-edit-id]');
+                if (btnEdit) {
+                    openForm(btnEdit.dataset.editId);
+                    return;
+                }
+
+                const btnDelete = e.target.closest('[data-delete-id]');
+                if (btnDelete) {
+                    const id = btnDelete.dataset.deleteId;
+                    const name = btnDelete.dataset.deleteName;
+                    AdminUI.confirmModal(
+                        'Excluir Adicional',
+                        `Tem certeza que deseja excluir "${name}"?`,
+                        () => {
+                            const res = AdminStore.removeAdicional(id);
+                            if (res.error) AdminUI.toast(res.error, 'error');
+                            else {
+                                AdminUI.toast('Adicional excluído.');
+                                renderTable();
+                            }
+                        }
+                    );
+                }
+            });
+
+            AdminUI.initSidebar();
+            renderTable();
+        })();
+    </script>
+</body>
+
+</html>

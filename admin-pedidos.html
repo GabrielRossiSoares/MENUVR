@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu VR — Acompanhar Pedidos</title>
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        .badge-pendente {
+            background-color: rgba(234, 179, 8, 0.15);
+            color: #ca8a04;
+        }
+
+        .badge-preparando {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #2563eb;
+        }
+
+        .badge-rota {
+            background-color: rgba(168, 85, 247, 0.15);
+            color: #9333ea;
+        }
+
+        .badge-entregue {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: #16a34a;
+        }
+
+        .status-select {
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: white;
+            font-family: var(--font);
+            font-size: 0.85rem;
+            color: var(--text-color);
+            cursor: pointer;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .status-select:focus {
+            border-color: var(--blue-vibrant);
+            box-shadow: 0 0 0 3px rgba(21, 101, 216, 0.1);
+        }
+
+        .order-id {
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .order-client {
+            font-weight: 500;
+        }
+
+        .order-items {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            max-width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+    </button>
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-logo">
+            <img src="assets/Logo.svg" alt="Logo Menu VR">
+        </div>
+        <nav class="sidebar-nav">
+            <a href="admin-dashboard.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                </svg>
+                Dashboard
+            </a>
+            <a href="admin-produto.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                </svg>
+                Produtos
+            </a>
+            <a href="admin-categoria.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <line x1="8" y1="6" x2="21" y2="6" />
+                    <line x1="8" y1="12" x2="21" y2="12" />
+                    <line x1="8" y1="18" x2="21" y2="18" />
+                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                </svg>
+                Categorias
+            </a>
+            <a href="admin-adicionais.html" class="nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Adicionais
+            </a>
+            <a href="admin-pedidos.html" class="nav-item active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1" />
+                    <circle cx="20" cy="21" r="1" />
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                </svg>
+                Pedidos
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="admin-config.html" class="nav-item">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                Configurações
+            </a>
+            <a href="admin-login.html" class="nav-item logout">
+                <svg viewBox="0 0 24 24">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                </svg>
+                Sair
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+        <header class="admin-header">
+            <h1 class="header-title">Acompanhar Pedidos</h1>
+            <div class="header-actions">
+                <div class="search-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <input type="text" id="searchPedido" placeholder="Buscar por cliente ou ID..." autocomplete="off">
+                </div>
+                <select class="filter-select" id="filterStatus">
+                    <option value="">Todos os status</option>
+                    <option value="pendente">Pendente</option>
+                    <option value="preparando">Preparando</option>
+                    <option value="rota">Em Rota</option>
+                    <option value="entregue">Entregue</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="admin-content" style="max-width: 1200px;">
+            <!-- Top Dashboard Info -->
+            <div class="dashboard-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+                <div class="stat-card">
+                    <div class="stat-title">Novos (Pendentes)</div>
+                    <div class="stat-value" id="statNovos" style="color: var(--primary);">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Em Preparo</div>
+                    <div class="stat-value" id="statPreparo">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Em Rota</div>
+                    <div class="stat-value" id="statRota">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-title">Entregues Hoje</div>
+                    <div class="stat-value" id="statEntregues" style="color: var(--success);">0</div>
+                </div>
+            </div>
+
+            <!-- Kanban Board -->
+            <div class="kanban-board" style="display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px;">
+                <!-- Column: Pendente -->
+                <div class="kanban-column" data-status="pendente" style="flex: 1; min-width: 280px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+                    <div style="font-weight: 600; color: var(--text-color); display: flex; align-items: center; justify-content: space-between;">
+                        <span>Pendente</span>
+                        <span class="col-count" style="background: var(--primary); color: white; border-radius: 12px; padding: 2px 8px; font-size: 0.8rem;">0</span>
+                    </div>
+                    <div class="kanban-dropzone" style="min-height: 100px; display: flex; flex-direction: column; gap: 12px;"></div>
+                </div>
+
+                <!-- Column: Preparando -->
+                <div class="kanban-column" data-status="preparando" style="flex: 1; min-width: 280px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+                    <div style="font-weight: 600; color: var(--text-color); display: flex; align-items: center; justify-content: space-between;">
+                        <span>Em Preparo</span>
+                        <span class="col-count" style="background: var(--text-muted); color: white; border-radius: 12px; padding: 2px 8px; font-size: 0.8rem;">0</span>
+                    </div>
+                    <div class="kanban-dropzone" style="min-height: 100px; display: flex; flex-direction: column; gap: 12px;"></div>
+                </div>
+
+                <!-- Column: Rota -->
+                <div class="kanban-column" data-status="rota" style="flex: 1; min-width: 280px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+                    <div style="font-weight: 600; color: var(--text-color); display: flex; align-items: center; justify-content: space-between;">
+                        <span>Em Rota</span>
+                        <span class="col-count" style="background: var(--text-muted); color: white; border-radius: 12px; padding: 2px 8px; font-size: 0.8rem;">0</span>
+                    </div>
+                    <div class="kanban-dropzone" style="min-height: 100px; display: flex; flex-direction: column; gap: 12px;"></div>
+                </div>
+
+                <!-- Column: Entregue -->
+                <div class="kanban-column" data-status="entregue" style="flex: 1; min-width: 280px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+                    <div style="font-weight: 600; color: var(--text-color); display: flex; align-items: center; justify-content: space-between;">
+                        <span>Entregue</span>
+                        <span class="col-count" style="background: var(--success); color: white; border-radius: 12px; padding: 2px 8px; font-size: 0.8rem;">0</span>
+                    </div>
+                    <div class="kanban-dropzone" style="min-height: 100px; display: flex; flex-direction: column; gap: 12px;"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Print View Container (Hidden normally) -->
+    <div id="printContainer" style="display: none;"></div>
+
+    <style>
+        /* Estilos Kanban Drag & Drop */
+        .kanban-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            cursor: grab;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .kanban-card:active {
+            cursor: grabbing;
+        }
+        .kanban-card.dragging {
+            opacity: 0.5;
+            transform: scale(0.98);
+        }
+        .kanban-dropzone {
+            flex: 1;
+            transition: background 0.2s;
+            border-radius: 8px;
+        }
+        .kanban-dropzone.drag-over {
+            background: rgba(0,0,0,0.02);
+            border: 2px dashed var(--border-color);
+        }
+        .dark-mode .kanban-dropzone.drag-over {
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Botão Print no Card */
+        .btn-print {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            padding: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-print:hover {
+            background: var(--bg-color);
+            color: var(--primary);
+        }
+
+        /* Estilos de Impressão de Comanda Térmica (80mm) */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printContainer, #printContainer * {
+                visibility: visible;
+            }
+            #printContainer {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 80mm;
+                padding: 5mm;
+                font-family: monospace, sans-serif;
+                color: #000;
+                background: #fff;
+            }
+            .print-title {
+                text-align: center;
+                font-size: 1.5em;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .print-divider {
+                border-top: 1px dashed #000;
+                margin: 8px 0;
+            }
+            .print-info {
+                font-size: 1.1em;
+                margin-bottom: 4px;
+            }
+            .print-item {
+                font-size: 1.1em;
+                margin-bottom: 4px;
+                display: flex;
+                justify-content: space-between;
+            }
+            .print-total {
+                font-size: 1.3em;
+                font-weight: bold;
+                text-align: right;
+                margin-top: 10px;
+            }
+            @page {
+                margin: 0;
+            }
+        }
+    </style>
+
+    <script src="admin.js"></script>
+    <script>
+        (() => {
+            const columns = document.querySelectorAll('.kanban-column');
+            const dropzones = document.querySelectorAll('.kanban-dropzone');
+            
+            function updateStats() {
+                const pedidos = AdminStore.getPedidos();
+                document.getElementById('statNovos').textContent = pedidos.filter(p => p.status === 'pendente').length;
+                document.getElementById('statPreparo').textContent = pedidos.filter(p => p.status === 'preparando').length;
+                document.getElementById('statRota').textContent = pedidos.filter(p => p.status === 'rota').length;
+                document.getElementById('statEntregues').textContent = pedidos.filter(p => p.status === 'entregue').length;
+                
+                // Update column counts
+                columns.forEach(col => {
+                    const status = col.dataset.status;
+                    const count = pedidos.filter(p => p.status === status).length;
+                    col.querySelector('.col-count').textContent = count;
+                });
+            }
+
+            function printComanda(pedidoId) {
+                const pedido = AdminStore.getPedidoById(pedidoId);
+                if (!pedido) return;
+
+                const container = document.getElementById('printContainer');
+                container.innerHTML = `
+                    <div class="print-title">MENU VR</div>
+                    <div style="text-align:center;">Comanda de Pedido</div>
+                    <div class="print-divider"></div>
+                    <div class="print-info"><b>Pedido:</b> #${pedido.id}</div>
+                    <div class="print-info"><b>Hora:</b> ${pedido.time}</div>
+                    <div class="print-info"><b>Cliente:</b> ${pedido.cliente}</div>
+                    <div class="print-info"><b>Tel:</b> ${pedido.telefone}</div>
+                    <div class="print-divider"></div>
+                    <div style="font-weight:bold; margin-bottom: 5px;">ITENS:</div>
+                    ${pedido.itens.split(',').map(i => `<div class="print-item"><span>${i.trim()}</span></div>`).join('')}
+                    <div class="print-divider"></div>
+                    <div class="print-total">TOTAL: ${AdminUI.formatPrice(pedido.total)}</div>
+                    <div style="text-align:center; margin-top:20px; font-size: 0.9em;">Obrigado pela preferência!</div>
+                `;
+
+                container.style.display = 'block';
+                window.print();
+                container.style.display = 'none';
+            }
+
+            function renderKanban() {
+                const pedidos = AdminStore.getPedidos();
+                const term = (document.getElementById('searchPedido') ? document.getElementById('searchPedido').value.toLowerCase() : "");
+                const statusFiltro = (document.getElementById('filterStatus') ? document.getElementById('filterStatus').value : "");
+                
+                // Clear all dropzones
+                dropzones.forEach(zone => zone.innerHTML = '');
+
+                pedidos.forEach(pedido => {
+                    // Search filters
+                    const matchBusca = pedido.id.includes(term) || pedido.cliente.toLowerCase().includes(term);
+                    const matchStatus = statusFiltro === '' || pedido.status === statusFiltro;
+                    
+                    if (!matchBusca || !matchStatus) return;
+
+                    const card = document.createElement('div');
+                    card.className = 'kanban-card';
+                    card.draggable = true;
+                    card.dataset.id = pedido.id;
+
+                    card.innerHTML = `
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                            <div style="font-weight: 600; font-size: 1.1rem;">#${pedido.id}</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem;">${pedido.time}</div>
+                        </div>
+                        <div style="font-weight: 500; margin-bottom: 4px;">${pedido.cliente}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;">
+                            ${pedido.itens}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 8px;">
+                            <div style="font-weight: 600;">${AdminUI.formatPrice(pedido.total)}</div>
+                            <button class="btn-print" title="Imprimir Comanda" data-print="${pedido.id}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                                    <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                    <rect x="6" y="14" width="12" height="8"></rect>
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+
+                    // Drag Events
+                    card.addEventListener('dragstart', (e) => {
+                        card.classList.add('dragging');
+                        e.dataTransfer.setData('text/plain', pedido.id);
+                    });
+
+                    card.addEventListener('dragend', () => {
+                        card.classList.remove('dragging');
+                    });
+
+                    // Print Event
+                    card.querySelector('.btn-print').addEventListener('click', (e) => {
+                        e.stopPropagation(); // Previne drag acidental
+                        printComanda(pedido.id);
+                    });
+
+                    // Append to correct column
+                    const col = document.querySelector(`.kanban-column[data-status="${pedido.status}"] .kanban-dropzone`);
+                    if (col) {
+                        col.appendChild(card);
+                    }
+                });
+
+                updateStats();
+            }
+
+            // Dropzone Events
+            dropzones.forEach(zone => {
+                zone.addEventListener('dragover', e => {
+                    e.preventDefault(); // Necessary to allow dropping
+                    zone.classList.add('drag-over');
+                });
+
+                zone.addEventListener('dragleave', () => {
+                    zone.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    zone.classList.remove('drag-over');
+                    
+                    const pedidoId = e.dataTransfer.getData('text/plain');
+                    const newStatus = zone.closest('.kanban-column').dataset.status;
+                    
+                    if (pedidoId && newStatus) {
+                        const result = AdminStore.updatePedidoStatus(pedidoId, newStatus);
+                        if (result.success) {
+                            renderKanban();
+                            AdminUI.toast('Status atualizado com sucesso!');
+                        }
+                    }
+                });
+            });
+
+            // Search logic
+            const searchInput = document.getElementById('searchPedido');
+            const filterStatus = document.getElementById('filterStatus');
+            
+            if(searchInput) searchInput.addEventListener('input', renderKanban);
+            if(filterStatus) filterStatus.addEventListener('change', renderKanban);
+
+            AdminUI.initSidebar();
+            renderKanban();
+        })();
+    </script>
+</body>
+</html>
