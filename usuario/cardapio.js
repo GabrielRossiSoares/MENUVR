@@ -326,7 +326,7 @@ function initThreeJS() {
 
     const loader = new THREE.GLTFLoader();
 
-    loader.load('assets/hamburguer.glb', (gltf) => {
+    loader.load('../assets/hamburguer.glb', (gltf) => {
         let globalItemIndex = 0;
         menuData.forEach((section) => {
             section.items.forEach((item) => {
@@ -535,7 +535,7 @@ function renderRestaurantFooter() {
     const phone = restaurantInfo.phone.replace(/[^\d]/g, '');
 
     footer.innerHTML = `
-        <img src="assets/Logo.svg" alt="Logo ${restaurantInfo.name}" class="footer-logo">
+        <img src="../assets/Logo.svg" alt="Logo ${restaurantInfo.name}" class="footer-logo">
         <h2 class="footer-name">${restaurantInfo.name}</h2>
         <div class="footer-info">
             <div class="footer-info-item">
