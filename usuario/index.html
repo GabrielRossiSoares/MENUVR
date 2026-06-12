@@ -78,6 +78,11 @@
                 <span>Total:</span>
                 <span id="cart-total-value">R$ 0,00</span>
             </div>
+            <div class="checkout-fields">
+                <input type="text" id="cli-nome" class="checkout-input" placeholder="Seu nome" autocomplete="name">
+                <input type="tel" id="cli-fone" class="checkout-input" placeholder="WhatsApp (00) 00000-0000" autocomplete="tel" inputmode="numeric">
+                <span id="checkout-msg" class="checkout-msg"></span>
+            </div>
             <button class="checkout-btn">Finalizar Pedido</button>
         </div>
     </div>
@@ -126,7 +131,10 @@
     
     <!-- Acessibilidade Global -->
     <script src="accessibility.js"></script>
-    
+
+    <!-- Camada de persistência (pedidos no localStorage) -->
+    <script src="../admin/admin.js"></script>
+
     <script src="cardapio.js"></script>
 
     <!-- Motor de Realidade Aumentada (Invisível, usado como Trigger) -->

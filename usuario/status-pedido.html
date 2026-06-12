@@ -230,6 +230,8 @@
             
             <div class="error-msg" id="errorMsg">Pedido não encontrado.</div>
 
+            <a href="index.html" style="display:inline-block; margin-bottom:20px; color:var(--text-muted); text-decoration:none; font-size:0.9rem; font-weight:500;">← Voltar ao cardápio</a>
+
             <div id="trackerStatus" style="display: none;">
                 <div class="stepper" id="stepper">
                     <!-- Status 1: Pendente -->
@@ -365,6 +367,13 @@
         inputId.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') buscarPedido();
         });
+
+        // Auto-carrega o pedido recém-criado (vindo do cardápio via ?id=XXXX)
+        const urlId = new URLSearchParams(window.location.search).get('id');
+        if (urlId) {
+            inputId.value = urlId;
+            buscarPedido();
+        }
 
         // Polling para simular "Tempo Real" (atualiza a cada 5 segundos)
         setInterval(() => {

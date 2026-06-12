@@ -209,25 +209,71 @@ function initCartModal() {
 
     const checkoutBtn = document.querySelector('.checkout-btn');
     if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', () => {
-            if (cart.items.length > 0) {
-                // Redireciona para o login se houver itens
-                window.location.href = 'login.html';
-            } else {
-                // Feedback visual simples se o carrinho estiver vazio
-                checkoutBtn.innerText = "❌ Adicione itens!";
-                checkoutBtn.style.background = "var(--accent-red)";
-                setTimeout(() => {
-                    checkoutBtn.innerText = "Finalizar Pedido";
-                    checkoutBtn.style.background = "";
-                }, 2000);
-            }
-        });
+        checkoutBtn.addEventListener('click', () => finalizarPedido(checkoutBtn));
     }
 
     cartTrigger.addEventListener('click', () => toggleCart(true));
     closeCart.addEventListener('click', () => toggleCart(false));
     cartOverlay.addEventListener('click', () => toggleCart(false));
+
+    // Máscara de telefone no campo de checkout
+    const foneEl = document.getElementById('cli-fone');
+    if (foneEl) {
+        foneEl.addEventListener('input', () => {
+            let v = foneEl.value.replace(/\D/g, '').slice(0, 11);
+            if (v.length > 6) {
+                v = (v.length <= 10)
+                    ? v.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3')
+                    : v.replace(/^(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+            }
+            foneEl.value = v;
+        });
+    }
+}
+
+// Monta o resumo textual dos itens do carrinho (ex.: "2x Double Bacon, 1x Pudim")
+function buildItensResumo() {
+    return cart.items.map(i => `${i.qty}x ${i.name}`).join(', ');
+}
+
+// Cria o pedido no localStorage (AdminStore) e leva o cliente ao acompanhamento
+function finalizarPedido(btn) {
+    const msg = document.getElementById('checkout-msg');
+    const nomeEl = document.getElementById('cli-nome');
+    const foneEl = document.getElementById('cli-fone');
+    const showErr = (t) => { if (msg) { msg.textContent = t; msg.classList.add('visible'); } };
+
+    if (cart.items.length === 0) {
+        btn.innerText = '❌ Adicione itens!';
+        btn.style.background = 'var(--accent)';
+        setTimeout(() => { btn.innerText = 'Finalizar Pedido'; btn.style.background = ''; }, 2000);
+        return;
+    }
+
+    const nome = (nomeEl ? nomeEl.value : '').trim();
+    const foneRaw = (foneEl ? foneEl.value : '').replace(/\D/g, '');
+    if (nome.length < 2) { showErr('Informe seu nome para continuar.'); if (nomeEl) nomeEl.focus(); return; }
+    if (foneRaw.length < 10) { showErr('Informe um WhatsApp válido com DDD.'); if (foneEl) foneEl.focus(); return; }
+    if (msg) msg.classList.remove('visible');
+
+    if (typeof AdminStore === 'undefined') {
+        showErr('Erro ao registrar o pedido. Recarregue a página.');
+        return;
+    }
+
+    const res = AdminStore.createPedido({
+        cliente: nome,
+        telefone: foneEl.value.trim(),
+        itens: buildItensResumo(),
+        total: cart.getTotal()
+    });
+
+    if (res && res.success) {
+        cart.items = [];
+        window.location.href = `status-pedido.html?id=${res.item.id}`;
+    } else {
+        showErr((res && res.error) || 'Não foi possível criar o pedido. Tente novamente.');
+    }
 }
 
 function renderCartDrawer() {
