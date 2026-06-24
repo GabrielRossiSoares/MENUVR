@@ -565,59 +565,47 @@ body {
 
 /* ══ RESPONSIVE ══ */
 @media (max-width: 900px) {
+    html, body {
+        height: auto;
+        overflow-y: auto;
+    }
+
     body {
         align-items: flex-start;
         min-height: 100vh;
-        height: auto;
-        overflow-y: auto;
-        padding: 1rem;
-        padding-top: env(safe-area-inset-top, 1rem);
-    }
-
-    html {
-        height: auto;
+        padding: 0.5rem;
+        padding-top: env(safe-area-inset-top, 0.5rem);
+        padding-bottom: env(safe-area-inset-bottom, 1rem);
     }
 
     .split-container {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0;
         min-height: auto;
     }
 
+    /* Escala o burger inteiro visualmente — sem cortar nada */
     .split-left {
         min-height: auto;
-        padding: 1rem 1rem 0;
-        overflow: hidden;
+        padding: 0;
         width: 100%;
-        max-height: 320px;
         position: relative;
+        transform: scale(0.55);
+        transform-origin: top center;
+        /* Altura real do burger (~480px) × 0.55 = ~264px */
+        height: 480px;
+        margin-bottom: -200px; /* Compensa o espaço vazio do scale */
     }
-
-    .burger-playground {
-        width: 260px;
-        height: 320px;
-        margin: 0 auto;
-    }
-
-    .drag-layer img {
-        max-width: 280px;
-    }
-
-    .layer-pao-topo { margin-bottom: -90px; }
-    .layer-carne1  { margin-bottom: -140px; }
-    .layer-tomate  { margin-bottom: -115px; }
-    .layer-carne2  { margin-bottom: -145px; }
-    .layer-alface  { margin-bottom: -125px; }
 
     .playground-hint {
-        margin-top: 4px;
-        font-size: 0.72rem;
+        margin-top: 8px;
+        font-size: 0.85rem;
     }
 
     .btn-remontar {
-        bottom: -40px;
-        font-size: 0.78rem;
-        padding: 8px 22px;
+        bottom: -50px;
+        font-size: 0.85rem;
+        padding: 10px 24px;
     }
 
     .split-right {
@@ -633,33 +621,13 @@ body {
 
 @media (max-width: 480px) {
     body {
-        padding: 0.5rem;
-        padding-top: max(0.5rem, env(safe-area-inset-top, 0.5rem));
+        padding: 0.25rem;
+        padding-top: env(safe-area-inset-top, 0.25rem);
     }
 
     .split-left {
-        max-height: 260px;
-        padding: 0.5rem 0.5rem 0;
-    }
-
-    .burger-playground {
-        width: 220px;
-        height: 270px;
-    }
-
-    .drag-layer img {
-        max-width: 240px;
-    }
-
-    .layer-pao-topo { margin-bottom: -75px; }
-    .layer-carne1  { margin-bottom: -115px; }
-    .layer-tomate  { margin-bottom: -95px; }
-    .layer-carne2  { margin-bottom: -120px; }
-    .layer-alface  { margin-bottom: -100px; }
-
-    .playground-hint {
-        margin-top: 2px;
-        font-size: 0.68rem;
+        transform: scale(0.48);
+        margin-bottom: -230px;
     }
 
     .form-card {
@@ -687,23 +655,9 @@ body {
 
 @media (max-width: 380px) {
     .split-left {
-        max-height: 220px;
+        transform: scale(0.42);
+        margin-bottom: -260px;
     }
-
-    .burger-playground {
-        width: 190px;
-        height: 230px;
-    }
-
-    .drag-layer img {
-        max-width: 210px;
-    }
-
-    .layer-pao-topo { margin-bottom: -65px; }
-    .layer-carne1  { margin-bottom: -100px; }
-    .layer-tomate  { margin-bottom: -82px; }
-    .layer-carne2  { margin-bottom: -105px; }
-    .layer-alface  { margin-bottom: -88px; }
 
     .form-card {
         padding: 1.5rem 1rem;
