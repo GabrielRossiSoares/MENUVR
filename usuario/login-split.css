@@ -580,38 +580,56 @@ body {
 
     .split-container {
         flex-direction: column;
-        gap: 0;
+        gap: 0.5rem;
         min-height: auto;
     }
 
-    /* Escala o burger inteiro visualmente — sem cortar nada */
     .split-left {
+        flex: none;
         min-height: auto;
-        padding: 0;
+        padding: 1rem 1rem 0.5rem;
         width: 100%;
-        position: relative;
-        transform: scale(0.55);
-        transform-origin: top center;
-        /* Altura real do burger (~480px) × 0.55 = ~264px */
-        height: 480px;
-        margin-bottom: -200px; /* Compensa o espaço vazio do scale */
+        z-index: 200;
     }
+
+    .burger-playground {
+        width: 100%;
+        height: auto;
+        justify-content: flex-start;
+    }
+
+    /* Reduz o tamanho das imagens no mobile */
+    .drag-layer img {
+        max-width: 220px;
+    }
+
+    .layer-pao-topo img {
+        transform: scale(1.05);
+    }
+
+    /* Margens negativas proporcionais ao tamanho menor das imagens */
+    .layer-pao-topo { margin-bottom: -65px; }
+    .layer-carne1  { margin-bottom: -105px; }
+    .layer-tomate  { margin-bottom: -85px; }
+    .layer-carne2  { margin-bottom: -108px; }
+    .layer-alface  { margin-bottom: -92px; }
 
     .playground-hint {
         margin-top: 8px;
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .btn-remontar {
-        bottom: -50px;
-        font-size: 0.85rem;
-        padding: 10px 24px;
+        bottom: -45px;
+        font-size: 0.8rem;
+        padding: 8px 22px;
     }
 
     .split-right {
         max-width: 100%;
         width: 100%;
         padding: 0 0.5rem;
+        z-index: 100;
     }
 
     .form-card {
@@ -626,8 +644,22 @@ body {
     }
 
     .split-left {
-        transform: scale(0.48);
-        margin-bottom: -230px;
+        padding: 0.5rem 0.5rem 0.25rem;
+    }
+
+    .drag-layer img {
+        max-width: 185px;
+    }
+
+    .layer-pao-topo { margin-bottom: -55px; }
+    .layer-carne1  { margin-bottom: -88px; }
+    .layer-tomate  { margin-bottom: -72px; }
+    .layer-carne2  { margin-bottom: -90px; }
+    .layer-alface  { margin-bottom: -77px; }
+
+    .playground-hint {
+        margin-top: 4px;
+        font-size: 0.7rem;
     }
 
     .form-card {
@@ -654,10 +686,15 @@ body {
 }
 
 @media (max-width: 380px) {
-    .split-left {
-        transform: scale(0.42);
-        margin-bottom: -260px;
+    .drag-layer img {
+        max-width: 160px;
     }
+
+    .layer-pao-topo { margin-bottom: -48px; }
+    .layer-carne1  { margin-bottom: -76px; }
+    .layer-tomate  { margin-bottom: -62px; }
+    .layer-carne2  { margin-bottom: -78px; }
+    .layer-alface  { margin-bottom: -66px; }
 
     .form-card {
         padding: 1.5rem 1rem;
